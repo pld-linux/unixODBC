@@ -8,3 +8,119 @@
  dnl AC_SUBST(all_includes)
  dnl AC_SUBST(all_libraries)
  
+--- unixODBC-2.0.8/acinclude.m4.orig	Wed Jun 13 11:52:05 2001
++++ unixODBC-2.0.8/acinclude.m4	Sun Aug 12 19:47:54 2001
+@@ -329,8 +329,8 @@
+ ac_x_libraries=$kde_x_libraries
+ ac_x_includes=$kde_x_includes
+ 
+-AC_PATH_X_DIRECT
+-AC_PATH_X_XMKMF
++_AC_PATH_X_DIRECT
++_AC_PATH_X_XMKMF
+ if test -z "$ac_x_includes"; then
+ ac_x_includes="."
+ fi
+@@ -423,7 +423,6 @@
+ them either.])
+ fi
+ 
+-])
+ 
+ AC_LANG_RESTORE
+ ])
+@@ -1911,36 +1910,6 @@
+     fi
+   fi])
+  
+-dnl From Jim Meyering.
+-dnl FIXME: migrate into libit.
+-
+-AC_DEFUN(AM_FUNC_OBSTACK,
+-[AC_CACHE_CHECK([for obstacks], am_cv_func_obstack,
+- [AC_TRY_LINK([#include "obstack.h"],
+-	      [struct obstack *mem;obstack_free(mem,(char *) 0)],
+-	      am_cv_func_obstack=yes,
+-	      am_cv_func_obstack=no)])
+- if test $am_cv_func_obstack = yes; then
+-   AC_DEFINE(HAVE_OBSTACK)
+- else
+-   LIBOBJS="$LIBOBJS obstack.o"
+- fi
+-])
+-
+-dnl From Jim Meyering.  Use this if you use the GNU error.[ch].
+-dnl FIXME: Migrate into libit
+-
+-AC_DEFUN(AM_FUNC_ERROR_AT_LINE,
+-[AC_CACHE_CHECK([for error_at_line], am_cv_lib_error_at_line,
+- [AC_TRY_LINK([],[error_at_line(0, 0, "", 0, "");],
+-              am_cv_lib_error_at_line=yes,
+-	      am_cv_lib_error_at_line=no)])
+- if test $am_cv_lib_error_at_line = no; then
+-   LIBOBJS="$LIBOBJS error.o"
+- fi
+- AC_SUBST(LIBOBJS)dnl
+-])
+-
+ # Macro to add for using GNU gettext.
+ # Ulrich Drepper <drepper@cygnus.com>, 1995.
+ 
+@@ -3014,16 +2983,15 @@
+ ac_save_LIBS="$LIBS"
+ LIBS="-l$1 $5 $LIBS"
+ AC_TRY_LINK(dnl
+-ifelse(AC_LANG, [FORTRAN77], ,
+ ifelse([$2], [main], , dnl Avoid conflicting decl of main.
+ [/* Override any gcc2 internal prototype to avoid an error.  */
+-]ifelse(AC_LANG, CPLUSPLUS, [#ifdef __cplusplus
++#ifdef __cplusplus
+ extern "C"
+ #endif
+-])dnl
++]
+ [/* Use this to make sure it works with Tru64 */
+ #include <pthread.h>
+-])),
++]),
+ 	    [$2(0)],
+ 	    eval "ac_cv_lib_$ac_lib_var=yes",
+ 	    eval "ac_cv_lib_$ac_lib_var=no")
+@@ -3068,17 +3036,16 @@
+ ac_save_LIBS="$LIBS"
+ LIBS="-l$1 $5 $LIBS"
+ AC_TRY_LINK(dnl
+-ifelse(AC_LANG, [FORTRAN77], ,
+ ifelse([$2], [main], , dnl Avoid conflicting decl of main.
+ [/* Override any gcc2 internal prototype to avoid an error.  */
+-]ifelse(AC_LANG, CPLUSPLUS, [#ifdef __cplusplus
++#ifdef __cplusplus
+ extern "C"
+ #endif
+ ])dnl
+ [/* We use char because int might match the return type of a gcc2
+     builtin and then its argument prototype would still apply.  */
+ char $2();
+-])),
++],
+ 	    [$2()],
+ 	    eval "ac_cv_lib_$ac_lib_var=yes",
+ 	    eval "ac_cv_lib_$ac_lib_var=no")
+@@ -3145,14 +3112,14 @@
+ dnl #   auxilliary macros
+ AC_DEFUN(_AC_PTH_ERROR, [dnl
+ AC_MSG_RESULT([*FAILED*])
+-define(_ac_pth_line,dnl
+-"+------------------------------------------------------------------------+")
++define(`_ac_pth_line',dnl
++`+------------------------------------------------------------------------+')
+ echo " _ac_pth_line" 1>&2
+ cat <<EOT | sed -e 's/^[[ 	]]*/ | /' -e 's/>>/  /' 1>&2
+ $1
+ EOT
+ echo " _ac_pth_line" 1>&2
+-undefine(_ac_pth_line)
++undefine(`_ac_pth_line')
+ exit 1
+ ])
+ AC_DEFUN(_AC_PTH_VERBOSE, [dnl

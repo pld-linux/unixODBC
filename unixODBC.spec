@@ -2,12 +2,16 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuxa
 Name:		unixODBC
 Version:	2.0.8
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	Библиотеки
+Group(uk):	Б╕бл╕отеки
 Source0:	ftp://ftp.easysoft.com/pub/beta/%{name}/%{name}-%{version}.tar.gz
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
@@ -37,8 +41,12 @@ Summary:	unixODBC header files and development documentation
 Summary(pl):	Pliki nagЁСwkowe i dokunentacja do unixODBC 
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -52,8 +60,12 @@ Summary:	unixODBC static libraries
 Summary(pl):	Biblioteki statyczne unixODBC
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -68,10 +80,11 @@ Biblioteki statyczne unixODBC.
 %patch1 -p1
 
 %build
-rm missing config.guess config.sub
+rm -f missing config.guess config.sub
 aclocal
 autoconf
 automake -a -c
+(cd libltdl ; autoconf)
 %configure \
 	--disable-gui \
 	--enable-threads \
@@ -83,15 +96,21 @@ automake -a -c
 #	--with-qt-dir=%{_prefix} 
 %{__make} 
 
+# avoid relinking in some dirs
+for f in cur/libodbccr.la samples/libboundparam.la ; do
+	sed -e '/^relink_command/d' $f > $f.new
+	mv -f $f.new $f
+done
+
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__install} -d $RPM_BUILD_ROOT{%{_applnkdir}/System,%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/System,%{_pixmapsdir}}
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-#%{__install} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
-#%{__install} %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
-%{__install} %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
+#install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
+#install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
 
 gzip -9nf AUTHORS NEWS
 
