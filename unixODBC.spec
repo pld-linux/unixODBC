@@ -19,6 +19,7 @@ Source3:	odbcinst.ini
 Source4:	%{name}.png
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-ac_fix.patch
+Patch2:		%{name}-am_fix.patch
 Icon:		unixODBC.xpm
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -78,6 +79,7 @@ Biblioteki statyczne unixODBC.
 %setup -q 
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 rm -f missing config.guess config.sub
