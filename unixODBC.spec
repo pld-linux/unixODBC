@@ -10,7 +10,7 @@ Source0:	ftp://ftp.easysoft.com/pub/beta/%{name}/%{name}-%{version}.tar.gz
 Patch0:		unixODBC-DESTDIR.patch
 #BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr
 %define		_sysconfdir	/etc
