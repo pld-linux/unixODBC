@@ -83,12 +83,6 @@ rm -f missing config.guess config.sub
 #	--with-qt-dir=%{_prefix}
 %{__make}
 
-# avoid relinking in some dirs
-#for f in cur/libodbccr.la samples/libboundparam.la ; do
-#	sed -e '/^relink_command/d' $f > $f.new
-#	mv -f $f.new $f
-#done
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/System,%{_pixmapsdir}}
