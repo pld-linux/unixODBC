@@ -1,11 +1,12 @@
---- unixODBC-1.8.9/Makefile.am	Tue Jun 13 23:36:49 2000
-+++ unixODBC-1.8.9.new/Makefile.am	Tue Jun 13 23:39:11 2000
-@@ -114,5 +114,6 @@
- 	gODBCConfig/pixmaps/trace.xpm
+--- unixODBC-2.0.8/Makefile.am.orig	Thu Jun 21 18:00:46 2001
++++ unixODBC-2.0.8/Makefile.am	Tue Jun 26 08:53:44 2001
+@@ -121,6 +121,7 @@
+ 	vmsbuild.com
  
  install-data-am:
 -	touch ${sysconfdir}/odbcinst.ini
 -	touch ${sysconfdir}/odbc.ini
 +	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)
-+	touch $(DESTDIR)$(sysconfdir)/odbcinst.ini
-+	touch $(DESTDIR)$(sysconfdir)/odbc.ini
++	touch $(DESTDIR)${sysconfdir}/odbcinst.ini
++	touch $(DESTDIR)${sysconfdir}/odbc.ini
+ 
