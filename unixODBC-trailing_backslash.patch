@@ -7,17 +7,3 @@ diff -urN unixODBC-2.2.6.orig/doc/Makefile.am unixODBC-2.2.6/doc/Makefile.am
  	smallbook.gif \
 -	unixODBC.gif \
 +	unixODBC.gif
-diff -urN unixODBC-2.2.6.orig/doc/Makefile.am~ unixODBC-2.2.6/doc/Makefile.am~
---- unixODBC-2.2.6.orig/doc/Makefile.am~	Thu Jan  1 00:00:00 1970
-+++ unixODBC-2.2.6/doc/Makefile.am~	Wed Oct 17 16:40:15 2001
-@@ -0,0 +1,10 @@
-+SUBDIRS = \
-+	AdministratorManual \
-+	ProgrammerManual \
-+	UserManual \
-+	lst
-+
-+EXTRA_DIST = \
-+	index.html \
-+	smallbook.gif \
-+	unixODBC.gif \
