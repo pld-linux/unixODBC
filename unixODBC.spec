@@ -13,6 +13,8 @@ Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
 Source3:	odbcinst.ini
 Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-am1.4b-fixes.patch
+BuildRequires:	autoconf
 BuildRequires:	automake
 #BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
@@ -57,11 +59,14 @@ Biblioteki statyczne unixODBC.
 
 %prep
 %setup -q 
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 libtoolize --force
-automake
+aclocal
+autoconf
+automake -a -c
 %configure \
 	--disable-gui \
 	--enable-threads \
