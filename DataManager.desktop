@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=DataManager
 Comment=Application finder
+Comment[pl]=Wykrywacz programów
 Exec=DataManager
 Icon=unixODBC.png
 MiniIcon=smallLinuxODBC.xpm

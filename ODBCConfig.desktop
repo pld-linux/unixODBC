@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=ODBCConfig
 Comment=Application finder
+Comment[pl]=Wykrywacz programów
 Exec=ODBCConfig
 Icon=unixODBC.png
 MiniIcon=smallLinuxODBC.xpm
 Type=Application
 Terminal=0
+# vi: encoding=utf-8
