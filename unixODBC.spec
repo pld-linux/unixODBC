@@ -95,8 +95,6 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/System,%{_pixmapsdir}}
 install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-gzip -9nf AUTHORS NEWS
-
 find doc -name Makefile\* -exec rm -f {} \;
 
 %clean
@@ -123,7 +121,7 @@ EOF
 
 %files
 %defattr(644,root,root,755)
-%doc {AUTHORS,NEWS}.gz doc/*
+%doc AUTHORS NEWS doc/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/odbc*.ini
