@@ -7,7 +7,7 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.6
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 # WARNING: they place snapshots of new versions using %{name}-%{version}.tar.gz
@@ -16,7 +16,8 @@ Source0:	ftp://ftp.easysoft.com/pub/%{name}/%{name}-%{version}.tar.gz
 # Source0-md5:	748ce54e34b2b339c99a8b1ddaee54f5
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
-Source3:	%{name}.png
+Source3:	ODBCtest.desktop
+Source4:	%{name}.png
 Patch0:		%{name}-ac_fix.patch
 Patch1:		%{name}-no_libnsl.patch
 Patch2:		%{name}-libltdl-shared.patch
@@ -166,9 +167,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %if %{with qt}
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/System,%{_pixmapsdir}}
-install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
-install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
+install %{SOURCE1} %{SOURCE2} %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 %endif
 
 %if %{with gnome1}
@@ -269,6 +270,6 @@ EOF
 %attr(755,root,root) %{_bindir}/ODBCConfig
 %attr(755,root,root) %{_bindir}/odbctest
 %attr(755,root,root) %{_libdir}/libodbcinstQ.so.*.*.*
-%{_applnkdir}/System/*
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %endif
