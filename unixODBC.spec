@@ -1,8 +1,8 @@
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuxa
 Name:		unixODBC
-Version:	2.0.8
-Release:	3
+Version:	2.1.0
+Release:	1
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -15,8 +15,7 @@ Group(uk):	‚¶¬Ã¶œ‘≈À…
 Source0:	ftp://ftp.easysoft.com/pub/beta/%{name}/%{name}-%{version}.tar.gz
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
-Source3:	odbcinst.ini
-Source4:	%{name}.png
+Source3:	%{name}.png
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-ac_fix.patch
 Patch2:		%{name}-am_fix.patch
@@ -38,7 +37,8 @@ unixODBC is a complete, free/open, ODBC solution for UNIX/Linux.
 unixODBC - kompletne, darmowe/otwarte ODBC dla systemÛw UNIX/Linux.
 
 %package devel
-Summary:	unixODBC header files and development documentation
+Summary
+:	unixODBC header files and development documentation
 Summary(pl):	Pliki nag≥Ûwkowe i dokunentacja do unixODBC 
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
@@ -79,7 +79,7 @@ Biblioteki statyczne unixODBC.
 %setup -q 
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1
 
 %build
 rm -f missing config.guess config.sub
@@ -110,9 +110,8 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/System,%{_pixmapsdir}}
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-#install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
-#install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
+install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
+install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 gzip -9nf AUTHORS NEWS
 
@@ -121,7 +120,23 @@ find doc -name Makefile\* -exec rm -f {} \;
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
+%post
+/sbin/ldconfig
+# install text driver
+/usr/bin/odbcinst -i -d -r <<EOF
+[TXT]
+Description = Text file driver
+Driver = %{_libdir}/libodbctxt.so
+Setup = %{_libdir}/libodbctxtS.so
+EOF
+# install postgresql driver
+/usr/bin/odbcinst -i -d -r <<EOF
+[TXT]
+Description = PostgreSQL driver
+Driver = %{_libdir}/libodbpsql.so
+Setup = %{_libdir}/libodbpsqlS.so
+EOF
+
 %postun -p /sbin/ldconfig
 
 %files
@@ -129,13 +144,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc {AUTHORS,NEWS}.gz doc/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %attr(755,root,root) %{_bindir}/*
-%config(noreplace) %verify(not md5 size mtime)  %{_sysconfdir}/odbc*.ini
-#%{_applnkdir}/System/*
-#%{_pixmapsdir}/*
+%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/odbc*.ini
+%{_applnkdir}/System/*
+%{_pixmapsdir}/*
 
 %files devel
 %defattr(644,root,root,755)
-#doc {AUTHORS,NEWS}.gz doc/*
+doc {AUTHORS,NEWS}.gz doc/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*.h
