@@ -1,8 +1,8 @@
-Summary:	unixODBC -a complete, free/open, ODBC solution for UNIX/Linux
-Summary(pl):	unixODBC
+Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
+Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuxa
 Name:		unixODBC
-Version:	2.0.4
-Release:	2
+Version:	2.0.5
+Release:	1
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -26,6 +26,9 @@ BuildConflicts:	kdesupport-odbc
 
 %description
 unixODBC is a complete, free/open, ODBC solution for UNIX/Linux.
+
+%description -l pl
+unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuxa.
 
 %package devel
 Summary:	unixODBC header files and development documentation
