@@ -2,11 +2,11 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.6
-Release:	1.20030324.1
+Release:	1.20030624.1
 License:	LGPL
 Group:		Libraries
-# Source0-md5:	8c225e18937b89974e747f2e91fd5e8f
 Source0:	ftp://ftp.easysoft.com/pub/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	a442cf6de50b0aca9cb7a984ede25e09
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
 Source3:	%{name}.png
@@ -16,12 +16,12 @@ Patch2:		%{name}-libltdl-shared.patch
 Patch3:		%{name}-trailing_backslash.patch
 Icon:		unixODBC.xpm
 URL:		http://www.unixodbc.com/
+#BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	readline-devel >= 4.2
-#BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
 Requires(post):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
