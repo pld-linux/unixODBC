@@ -7,7 +7,7 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.9
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 # WARNING: they place snapshots of new versions using %{name}-%{version}.tar.gz
@@ -24,6 +24,7 @@ Patch2:		%{name}-libltdl-shared.patch
 Patch3:		%{name}-flex.patch
 Patch4:		%{name}-gODBCConfig.patch
 Patch5:		%{name}-syntax.patch
+Patch6:		%{name}-types.patch
 Icon:		unixODBC.xpm
 URL:		http://www.unixodbc.com/
 BuildRequires:	autoconf
@@ -135,6 +136,7 @@ DataManagerII, ODBCConfig, odbctest.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 %{__libtoolize}
