@@ -7,4 +7,5 @@ Icon=unixODBC.png
 MiniIcon=smallLinuxODBC.xpm
 Type=Application
 Terminal=0
+Encoding=UTF-8
 # vi: encoding=utf-8
