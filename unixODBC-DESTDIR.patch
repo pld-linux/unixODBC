@@ -1,0 +1,11 @@
+diff -ur unixODBC-1.8.6.old/Makefile.am unixODBC-1.8.6/Makefile.am
+--- unixODBC-1.8.6.old/Makefile.am	Wed Nov 10 04:51:32 1999
++++ unixODBC-1.8.6/Makefile.am	Wed Feb 23 21:13:42 2000
+@@ -20,5 +20,5 @@
+     samples
+ 
+ install-data-am:
+-	touch @sysconfdir@/odbcinst.ini
+-	touch @sysconfdir@/odbc.ini
++	touch $(DESTDIR)$(sysconfdir)/odbcinst.ini
++	touch $(DESTDIR)$(sysconfdir)/odbc.ini
