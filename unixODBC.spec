@@ -20,10 +20,10 @@ Source4:	%{name}.png
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-ac_fix.patch
 Icon:		unixODBC.xpm
-#BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.2
+#BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildConflicts:	kdesupport-odbc
@@ -34,7 +34,7 @@ BuildConflicts:	kdesupport-odbc
 unixODBC is a complete, free/open, ODBC solution for UNIX/Linux.
 
 %description -l pl
-unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuxa.
+unixODBC - kompletne, darmowe/otwarte ODBC dla systemów UNIX/Linux.
 
 %package devel
 Summary:	unixODBC header files and development documentation
@@ -52,7 +52,7 @@ Requires:	%{name} = %{version}
 %description devel
 unixODBC header files and development documentation.
 
-%description -l pl
+%description devel -l pl
 Pliki nag³ówkowe i dokunentacja do unixODBC.
 
 %package static
@@ -71,7 +71,7 @@ Requires:	%{name}-devel = %{version}
 %description static
 unixODBC static libraries.
 
-%description -l pl static
+%description static -l pl
 Biblioteki statyczne unixODBC.
 
 %prep
@@ -114,13 +114,13 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
 
 gzip -9nf AUTHORS NEWS
 
-find doc -name Makefile\* -exec rm {} \;
-
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+find doc -name Makefile\* -exec rm -f {} \;
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
