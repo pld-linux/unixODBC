@@ -1,7 +1,7 @@
 Summary:	unixODBC -a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC
 Name:		unixODBC
-Version:	1.8.9
+Version:	1.8.10
 Release:	1
 License:	LGPL
 Group:		Libraries
