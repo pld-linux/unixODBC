@@ -1,13 +1,14 @@
 Summary:	unixODBC -a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC
 Name:		unixODBC
-Version:	1.8.7
+Version:	1.8.9
 Release:	1
 License:	LGPL
 Group:		Libraries
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.easysoft.com/pub/beta/%{name}/%{name}-%{version}.tar.gz
 Patch0:		unixODBC-DESTDIR.patch
+BuildRequires:	automake
 #BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
