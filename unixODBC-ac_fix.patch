@@ -118,6 +118,18 @@ diff -urN unixODBC-2.1.0/acinclude.m4 unixODBC-2.1.0-new/acinclude.m4
 diff -urN unixODBC-2.1.0/configure.in unixODBC-2.1.0-new/configure.in
 --- unixODBC-2.1.0/configure.in	Thu Nov  1 11:58:25 2001
 +++ unixODBC-2.1.0-new/configure.in	Thu Jan 17 15:34:37 2002
+@@ -26,10 +26,9 @@
+     esac],[gui=true])
+ 
+ dnl Only need c++ for the GUI bits
++dnl but AC_PROG_CC cannot be used conditionally
+ 
+-if test "x$gui" = "xtrue"; then
+ AC_PROG_CXX
+-fi
+ 
+ dnl Check if we want to worry about threads
+ 
 @@ -320,7 +320,6 @@
     done
  ])
@@ -126,11 +138,11 @@ diff -urN unixODBC-2.1.0/configure.in unixODBC-2.1.0-new/configure.in
  dnl AC_SUBST(all_includes)
  dnl AC_SUBST(all_libraries)
  
-@@ -381,7 +381,6 @@
-     Drivers/nn/Makefile \
-     Drivers/txt/Makefile \
+@@ -383,7 +383,6 @@
      Drivers/txt/doc/Makefile \
--    Drivers/odbc/Makefile \
-     Drivers/template/Makefile \
      Drivers/odbc/Makefile \
+     Drivers/template/Makefile \
+-    Drivers/odbc/Makefile \
      Drivers/MySQL/Makefile \
+     Drivers/MiniSQL/Makefile \
+     include/Makefile \

@@ -17,9 +17,11 @@ Icon:		unixODBC.xpm
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libltdl-devel
+BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	readline-devel >= 4.2
 #BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
+Requires(post):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildConflicts:	kdesupport-odbc
 Obsoletes:	libunixODBC2
@@ -66,6 +68,7 @@ Biblioteki statyczne unixODBC.
 
 %build
 rm -f missing config.guess config.sub
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -81,10 +84,10 @@ rm -f missing config.guess config.sub
 %{__make}
 
 # avoid relinking in some dirs
-for f in cur/libodbccr.la samples/libboundparam.la ; do
-	sed -e '/^relink_command/d' $f > $f.new
-	mv -f $f.new $f
-done
+#for f in cur/libodbccr.la samples/libboundparam.la ; do
+#	sed -e '/^relink_command/d' $f > $f.new
+#	mv -f $f.new $f
+#done
 
 %install
 rm -rf $RPM_BUILD_ROOT
