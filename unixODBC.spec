@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	gnome1	# without GNOME1 GUI stuff (default on - no GNOME2 port yet)
-%bcond_without	qt	# without QT GUI stuff
+%bcond_without	qt	# without Qt GUI stuff
 #
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
