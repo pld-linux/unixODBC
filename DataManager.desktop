@@ -1,11 +1,8 @@
 [Desktop Entry]
-Name=DataManager
-Comment=Application finder
-Comment[pl]=Wykrywacz programów
-Exec=DataManager
+Encoding=UTF-8
+Name=ODBC Data Manager
+Exec=DataManagerII
 Icon=unixODBC.png
-MiniIcon=smallLinuxODBC.xpm
 Type=Application
 Terminal=false
-Encoding=UTF-8
-# vi: encoding=utf-8
+Categories=Qt;System
