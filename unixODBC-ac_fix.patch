@@ -126,3 +126,11 @@ diff -urN unixODBC-2.1.0/configure.in unixODBC-2.1.0-new/configure.in
  dnl AC_SUBST(all_includes)
  dnl AC_SUBST(all_libraries)
  
+@@ -381,7 +381,6 @@
+     Drivers/nn/Makefile \
+     Drivers/txt/Makefile \
+     Drivers/txt/doc/Makefile \
+-    Drivers/odbc/Makefile \
+     Drivers/template/Makefile \
+     Drivers/odbc/Makefile \
+     Drivers/MySQL/Makefile \
