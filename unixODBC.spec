@@ -2,7 +2,7 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuxa
 Name:		unixODBC
 Version:	2.1.1
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -132,7 +132,7 @@ Setup = %{_libdir}/libodbctxtS.so
 EOF
 # install postgresql driver
 /usr/bin/odbcinst -i -d -r <<EOF
-[TXT]
+[PostgreSQL]
 Description = PostgreSQL driver
 Driver = %{_libdir}/libodbpsql.so
 Setup = %{_libdir}/libodbpsqlS.so
