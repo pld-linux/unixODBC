@@ -71,6 +71,7 @@ Biblioteki statyczne unixODBC.
 %patch2 -p1
 
 %build
+rm missing config.guess config.sub
 libtoolize --copy --force
 aclocal
 autoconf
