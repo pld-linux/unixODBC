@@ -72,8 +72,8 @@ gzip -9fn AUTHORS NEWS
 
 find doc -name Makefile\* -exec rm {} \;
 
-%post -p ldconfig
-%postun -p ldconfig
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
