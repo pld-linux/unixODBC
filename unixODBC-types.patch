@@ -1,0 +1,15 @@
+diff -ur unixODBC-2.2.9.orig/include/sqltypes.h unixODBC-2.2.9/include/sqltypes.h
+--- unixODBC-2.2.9.orig/include/sqltypes.h	2004-06-25 19:01:15.000000000 +0200
++++ unixODBC-2.2.9/include/sqltypes.h	2004-10-03 00:51:29.842492392 +0200
+@@ -256,9 +256,9 @@
+ typedef signed short int        SWORD;
+ typedef unsigned short int      UWORD;
+ typedef unsigned int            UINT;
+-typedef signed long             SLONG;
++typedef signed int              SLONG;
+ typedef signed short            SSHORT;
+-typedef unsigned long           ULONG;
++typedef unsigned int            ULONG;
+ typedef unsigned short          USHORT;
+ typedef double                  SDOUBLE;
+ typedef double            		LDOUBLE;
