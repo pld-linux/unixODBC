@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=ODBC Test
+Exec=odbctest
+Icon=unixODBC.png
+Type=Application
+Terminal=false
+Categories=Qt;System
