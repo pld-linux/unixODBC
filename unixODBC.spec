@@ -132,7 +132,7 @@ EOF
 %defattr(644,root,root,755)
 %doc ChangeLog doc/ProgrammerManual
 %attr(755,root,root) %{_libdir}/lib*.so
-%attr(755,root,root) %{_libdir}/lib*.la
+%{_libdir}/lib*.la
 %{_includedir}/*.h
 
 %files static
