@@ -1,19 +1,19 @@
 #
 # Conditional build:
-%bcond_with gnome1	# with GNOME1 GUI stuff
-%bcond_without qt	# without QT GUI stuff
-
+%bcond_without	gnome1	# without GNOME1 GUI stuff (default on - no GNOME2 port yet)
+%bcond_without	qt	# without QT GUI stuff
+#
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
-Version:	2.2.6
-Release:	3
+Version:	2.2.7
+Release:	1
 License:	LGPL
 Group:		Libraries
 # WARNING: they place snapshots of new versions using %{name}-%{version}.tar.gz
 # scheme - so check for official releases on URL!
 Source0:	ftp://ftp.easysoft.com/pub/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	748ce54e34b2b339c99a8b1ddaee54f5
+# Source0-md5:	b248c085cb935daeded2abca5c0847c8
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
 Source3:	ODBCtest.desktop
