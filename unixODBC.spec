@@ -23,6 +23,7 @@ Patch3:		%{name}-libltdl-shared.patch
 Icon:		unixODBC.xpm
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	libltdl-devel
 BuildRequires:	readline-devel >= 4.2
 #BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
