@@ -126,7 +126,7 @@ EOF
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/odbc*.ini
 #%{_applnkdir}/System/*
-%{_pixmapsdir}/*
+#%{_pixmapsdir}/*
 
 %files devel
 %defattr(644,root,root,755)
