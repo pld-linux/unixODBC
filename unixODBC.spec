@@ -16,6 +16,7 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-am1.4b-fixes.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	readline-devel
 #BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
