@@ -14,6 +14,7 @@ Patch0:		%{name}-ac_fix.patch
 Patch1:		%{name}-no_libnsl.patch
 Patch2:		%{name}-libltdl-shared.patch
 Patch3:		%{name}-trailing_backslash.patch
+Patch4:		%{name}-flex.patch
 Icon:		unixODBC.xpm
 URL:		http://www.unixodbc.com/
 #BuildRequires:	XFree86-devel
@@ -67,6 +68,7 @@ Biblioteki statyczne unixODBC.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 rm -f missing config.guess config.sub
