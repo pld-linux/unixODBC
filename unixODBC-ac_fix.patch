@@ -1,0 +1,10 @@
+--- unixODBC-2.0.7/configure.in~	Tue May  1 19:45:14 2001
++++ unixODBC-2.0.7/configure.in	Sat May 19 09:06:13 2001
+@@ -255,7 +255,6 @@
+    done
+ ])
+ 
+-AC_SUBST(INCLUDES)
+ dnl AC_SUBST(all_includes)
+ dnl AC_SUBST(all_libraries)
+ 
