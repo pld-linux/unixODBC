@@ -1,10 +1,12 @@
 Summary:	unixODBC -a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC
 Name:		unixODBC
-Version:	1.8.12
+Version:	1.8.13
 Release:	1
 License:	LGPL
 Group:		Libraries
+Group(de):	Libraries
+Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.easysoft.com/pub/beta/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
@@ -23,6 +25,8 @@ unixODBC is a complete, free/open, ODBC solution for UNIX/Linux.
 Summary:	unixODBC header files and development documentation
 Summary(pl):	Pliki nag³ówkowe i dokunentacja do unixODBC 
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
@@ -36,6 +40,8 @@ Pliki nag³ówkowe i dokunentacja do unixODBC.
 Summary:	unixODBC static libraries
 Summary(pl):	Biblioteki statyczne unixODBC
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
@@ -52,7 +58,6 @@ Biblioteki statyczne unixODBC.
 %build
 libtoolize --force
 automake
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--disable-gui \
 	--enable-threads \
@@ -70,8 +75,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
 gzip -9nf AUTHORS NEWS
-
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*.*
 
 find doc -name Makefile\* -exec rm {} \;
 
