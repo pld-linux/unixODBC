@@ -1,36 +1,29 @@
-diff -Nur unixODBC-2.1.1.orig/Makefile.am unixODBC-2.1.1/Makefile.am
---- unixODBC-2.1.1.orig/Makefile.am	Sat Jan 19 16:52:00 2002
-+++ unixODBC-2.1.1/Makefile.am	Sat Jan 19 16:54:55 2002
+--- unixODBC-2.2.9/Makefile.am.orig	2004-06-29 14:11:02.000000000 +0200
++++ unixODBC-2.2.9/Makefile.am	2004-07-07 20:10:49.461109840 +0200
 @@ -3,7 +3,6 @@
      log \
  	lst \
  	ini \
--    libltdl \
+-    	libltdl \
  	odbcinst \
  	DriverManager \
  	odbcinstQ \
---- unixODBC-2.2.6/configure.in.orig	Thu Jul 10 10:54:55 2003
-+++ unixODBC-2.2.6/configure.in	Thu Jul 10 10:58:36 2003
-@@ -116,11 +116,10 @@
- AC_MSG_CHECKING( Have we disabled RTDL_GROUP )
+--- unixODBC-2.2.9/configure.in.orig	2004-07-07 20:09:10.724120144 +0200
++++ unixODBC-2.2.9/configure.in	2004-07-07 20:29:03.316818496 +0200
+@@ -135,15 +135,13 @@
+ AC_MSG_CHECKING( Have we enabled using RTDL_GROUP )
  if test "x$rtldgroup" = "xtrue"; then
-   AC_MSG_RESULT( no )
--  AC_LIBLTDL_CONVENIENCE
+ AC_MSG_RESULT( yes )
+-AC_LIBLTDL_CONVENIENCE
  else
-   AC_MSG_RESULT( yes );
--  AC_LIBLTDL_CONVENIENCE_G
+ AC_MSG_RESULT( no );
+-AC_LIBLTDL_CONVENIENCE_G
  fi
 +AC_LIBLTDL_INSTALLABLE
  
- dnl Substitute INCLTDL and LIBLTDL in the Makefiles
- AC_SUBST(INCLTDL)
-@@ -132,9 +131,6 @@
+ dnl Check for dlopen support
+ AC_LIBTOOL_DLOPEN
+-AC_CONFIG_SUBDIRS(libltdl)
+ 
  dnl Configure libtool
  AM_PROG_LIBTOOL
- 
--dnl Configure libltdl
--AC_CONFIG_SUBDIRS(libltdl)
--
- dnl Find shared lib extension
- AC_LTDL_SHLIBEXT
- SHLIBEXT="$libltdl_cv_shlibext"
