@@ -1,18 +1,13 @@
---- unixODBC-2.1.0/Makefile.am	Thu Jan 17 22:28:08 2002
-+++ unixODBC-2.1.0-saves/Makefile.am	Thu Jan 17 22:28:47 2002
-@@ -125,12 +125,7 @@
+--- unixODBC-2.1.1/Makefile.am.orig	Tue Dec  4 11:35:04 2001
++++ unixODBC-2.1.1/Makefile.am	Fri Jan 18 00:18:41 2002
+@@ -125,7 +125,7 @@
  	vmsbuild.com
  
  install-data-am:
 -	touch ${sysconfdir}/odbcinst.ini
 -	touch ${sysconfdir}/odbc.ini
 -	mkdir -p ${sysconfdir}/ODBCDataSources
--	echo "[TXT]" > txt_tmp.ini
--	echo "Description = Text file driver" >> txt_tmp.ini
--	echo "Driver = ${prefix}/lib/libodbctxt.so" >> txt_tmp.ini
--	echo "Setup = ${prefix}/lib/libodbctxtS.so" >> txt_tmp.ini
--	${prefix}/bin/odbcinst -d -i -f txt_tmp.ini
-+	mkdir -p $(DESTDIR)${sysconfdir}/ODBCDataSources
-+	touch $(DESTDIR)${sysconfdir}/odbcinst.ini
-+	touch $(DESTDIR)${sysconfdir}/odbc.ini
++	mkdir -p $(DESTDIR)$(sysconfdir)/ODBCDataSources
++	touch $(DESTDIR)$(sysconfdir)/odbcinst.ini
++	touch $(DESTDIR)$(sysconfdir)/odbc.ini
  
