@@ -2,7 +2,7 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.1.1
-Release:	3
+Release:	4
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://ftp.easysoft.com/pub/beta/%{name}/%{name}-%{version}.tar.gz
@@ -92,8 +92,8 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/System,%{_pixmapsdir}}
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
-install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
+#install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
+#install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 find doc -name Makefile\* -exec rm -f {} \;
 
@@ -125,7 +125,7 @@ EOF
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/odbc*.ini
-%{_applnkdir}/System/*
+#%{_applnkdir}/System/*
 %{_pixmapsdir}/*
 
 %files devel
