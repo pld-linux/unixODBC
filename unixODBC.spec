@@ -6,14 +6,14 @@
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
-Version:	2.2.7
-Release:	2
+Version:	2.2.8
+Release:	1
 License:	LGPL
 Group:		Libraries
 # WARNING: they place snapshots of new versions using %{name}-%{version}.tar.gz
 # scheme - so check for official releases on URL!
 Source0:	ftp://ftp.easysoft.com/pub/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	b248c085cb935daeded2abca5c0847c8
+# Source0-md5:	059b5eb2f1e836e8f2bfdf9f105ce2b4
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
 Source3:	ODBCtest.desktop
@@ -204,8 +204,8 @@ EOF
 /usr/bin/odbcinst -i -d -r <<EOF
 [PostgreSQL]
 Description = PostgreSQL driver
-Driver = %{_libdir}/libodbpsql.so.1
-Setup = %{_libdir}/libodbpsqlS.so.1
+Driver = %{_libdir}/libodbcpsql.so.1
+Setup = %{_libdir}/libodbcpsqlS.so.1
 EOF
 
 %postun -p /sbin/ldconfig
