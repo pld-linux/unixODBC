@@ -2,7 +2,7 @@
 Name=DataManager
 Comment=Application finder
 Exec=DataManager
-Icon=LinuxODBC.xpm
+Icon=unixODBC.png
 MiniIcon=smallLinuxODBC.xpm
 Type=Application
 Terminal=0

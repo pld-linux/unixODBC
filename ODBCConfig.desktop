@@ -2,7 +2,7 @@
 Name=ODBCConfig
 Comment=Application finder
 Exec=ODBCConfig
-Icon=LinuxODBC.xpm
+Icon=unixODBC.png
 MiniIcon=smallLinuxODBC.xpm
 Type=Application
 Terminal=0
