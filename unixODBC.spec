@@ -1,13 +1,13 @@
 Summary:	unixODBC -a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC
 Name:		unixODBC
-Version:	1.8.10
+Version:	1.8.11
 Release:	1
 License:	LGPL
 Group:		Libraries
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.easysoft.com/pub/beta/%{name}/%{name}-%{version}.tar.gz
-Patch0:		unixODBC-DESTDIR.patch
+Patch0:		%{name}-DESTDIR.patch
 BuildRequires:	automake
 #BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
@@ -69,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-gzip -9fn AUTHORS NEWS
+gzip -9nf AUTHORS NEWS
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*.*
 
@@ -89,8 +89,8 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 size mtime)  %{_sysconfdir}/odbc*.ini
 
 %files devel
-#doc {AUTHORS,NEWS}.gz doc/*
 %defattr(644,root,root,755)
+#doc {AUTHORS,NEWS}.gz doc/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*.h
