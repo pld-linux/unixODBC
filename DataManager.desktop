@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=DataManager
+Comment=Application finder
+Exec=DataManager
+Icon=LinuxODBC.xpm
+MiniIcon=smallLinuxODBC.xpm
+Type=Application
+Terminal=0
