@@ -1,8 +1,8 @@
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuxa
 Name:		unixODBC
-Version:	2.0.6
-Release:	4
+Version:	2.0.7
+Release:	1
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -14,15 +14,12 @@ Source2:	ODBCConfig.desktop
 Source3:	odbcinst.ini
 Source4:	%{name}.png
 Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-am1.4b-fixes.patch
-Patch2:		%{name}-segfault.patch
-Patch3:		%{name}-no_private_copy_libtool.m4.patch
+Patch1:		%{name}-ac_fix.patch
 Icon:		unixODBC.xpm
 #BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.2
-BuildRequires:	libtool
 #BuildRequires:	qt-devel >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildConflicts:	kdesupport-odbc
@@ -69,12 +66,9 @@ Biblioteki statyczne unixODBC.
 %setup -q 
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 rm missing config.guess config.sub
-libtoolize --copy --force
 aclocal
 autoconf
 automake -a -c
