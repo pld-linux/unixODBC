@@ -1,8 +1,8 @@
 #
 # Conditional build:
-# _without_gnome	- without GNOME1 GUI stuff
-# _without_qt		- without QT GUI stuff
-#
+%bcond_with gnome1	# with GNOME1 GUI stuff
+%bcond_without qt	# without QT GUI stuff
+
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
@@ -27,11 +27,11 @@ URL:		http://www.unixodbc.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-%{!?_without_gnome:BuildRequires:	gnome-libs-devel}
+%{?with_gnome1:BuildRequires:	gnome-libs-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	readline-devel >= 4.2
-%{!?_without_qt:BuildRequires:	qt-devel >= 2.0}
+%{?with_qt:BuildRequires:	qt-devel >= 2.0}
 Requires(post):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildConflicts:	kdesupport-odbc
@@ -139,7 +139,7 @@ DataManagerII, ODBCConfig, odbctest.
 %{__autoconf}
 %{__automake}
 %configure \
-	--%{?_without_qt:dis}%{!?_without_qt:en}able-gui \
+	--%{!?with_qt:dis}%{?with_qt:en}able-gui \
 	--enable-threads \
 	--enable-drivers \
 	--enable-shared \
@@ -147,7 +147,7 @@ DataManagerII, ODBCConfig, odbctest.
 
 %{__make}
 
-%if 0%{!?_without_gnome:1}
+%if %{with gnome1}
 cd gODBCConfig
 %{__gettextize}
 %{__libtoolize}
@@ -165,13 +165,13 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%if 0%{!?_without_qt:1}
+%if %{with qt}
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/System,%{_pixmapsdir}}
 install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 %endif
 
-%if 0%{!?_without_gnome:1}
+%if %{with gnome1}
 %{__make} install -C gODBCConfig \
 	DESTDIR=$RPM_BUILD_ROOT
 %endif
@@ -223,8 +223,8 @@ EOF
 %attr(755,root,root) %{_bindir}/iusql
 %attr(755,root,root) %{_bindir}/odbcinst
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%{!?_without_gnome:%exclude %{_libdir}/libgtkodbcconfig.*}
-%{!?_without_qt:%exclude %{_libdir}/libodbcinstQ.*}
+%{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
+%{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/odbc*.ini
 
 %files devel
@@ -232,18 +232,18 @@ EOF
 %doc ChangeLog doc/ProgrammerManual
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
-%{!?_without_gnome:%exclude %{_libdir}/libgtkodbcconfig.*}
-%{!?_without_qt:%exclude %{_libdir}/libodbcinstQ.*}
+%{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
+%{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
 %{_includedir}/*.h
-%{!?_without_gnome:%exclude %{_includedir}/odbcconfig.h}
+%{?with_gnome1:%exclude %{_includedir}/odbcconfig.h}
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
-%{!?_without_gnome:%exclude %{_libdir}/libgtkodbcconfig.*}
-%{!?_without_qt:%exclude %{_libdir}/libodbcinstQ.*}
+%{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
+%{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
 
-%if 0%{!?_without_gnome:1}
+%if %{with gnome1}
 %files gnome
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gODBCConfig
@@ -261,7 +261,7 @@ EOF
 %{_libdir}/libgtkodbcconfig.a
 %endif
 
-%if 0%{!?_without_qt:1}
+%if %{with qt}
 %files qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/DataManager
