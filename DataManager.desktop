@@ -5,5 +5,5 @@ Exec=DataManagerII
 Icon=unixODBC.png
 Type=Application
 Terminal=false
-Categories=Qt;System
+Categories=Qt;System;
 # vi: encoding=utf-8
