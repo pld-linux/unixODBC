@@ -1,6 +1,6 @@
-diff -urN unixODBC-2.1.0/acinclude.m4 unixODBC-2.1.0-new/acinclude.m4
---- unixODBC-2.1.0/acinclude.m4	Tue Nov 20 14:32:00 2001
-+++ unixODBC-2.1.0-new/acinclude.m4	Thu Jan 17 15:38:27 2002
+diff -Nur unixODBC-2.2.4.orig/acinclude.m4 unixODBC-2.2.4/acinclude.m4
+--- unixODBC-2.2.4.orig/acinclude.m4	Fri Jan  3 17:04:44 2003
++++ unixODBC-2.2.4/acinclude.m4	Fri Jan 24 20:15:02 2003
 @@ -337,8 +337,8 @@
  ac_x_libraries=$kde_x_libraries
  ac_x_includes=$kde_x_includes
@@ -9,140 +9,40 @@ diff -urN unixODBC-2.1.0/acinclude.m4 unixODBC-2.1.0-new/acinclude.m4
 -AC_PATH_X_XMKMF
 +_AC_PATH_X_DIRECT
 +_AC_PATH_X_XMKMF
+ 
  if test -z "$ac_x_includes"; then
  ac_x_includes="."
- fi
-@@ -431,8 +431,6 @@
- them either.])
- fi
- 
--])
--
- AC_LANG_RESTORE
- ])
- 
-@@ -2156,36 +2154,6 @@
-     fi
-   fi])
-  
--dnl From Jim Meyering.
--dnl FIXME: migrate into libit.
--
--AC_DEFUN(AM_FUNC_OBSTACK,
--[AC_CACHE_CHECK([for obstacks], am_cv_func_obstack,
-- [AC_TRY_LINK([#include "obstack.h"],
--	      [struct obstack *mem;obstack_free(mem,(char *) 0)],
--	      am_cv_func_obstack=yes,
--	      am_cv_func_obstack=no)])
-- if test $am_cv_func_obstack = yes; then
--   AC_DEFINE(HAVE_OBSTACK)
-- else
--   LIBOBJS="$LIBOBJS obstack.o"
-- fi
--])
--
--dnl From Jim Meyering.  Use this if you use the GNU error.[ch].
--dnl FIXME: Migrate into libit
--
--AC_DEFUN(AM_FUNC_ERROR_AT_LINE,
--[AC_CACHE_CHECK([for error_at_line], am_cv_lib_error_at_line,
-- [AC_TRY_LINK([],[error_at_line(0, 0, "", 0, "");],
--              am_cv_lib_error_at_line=yes,
--	      am_cv_lib_error_at_line=no)])
-- if test $am_cv_lib_error_at_line = no; then
--   LIBOBJS="$LIBOBJS error.o"
-- fi
-- AC_SUBST(LIBOBJS)dnl
--])
--
- # Macro to add for using GNU gettext.
- # Ulrich Drepper <drepper@cygnus.com>, 1995.
- 
-@@ -3259,16 +3227,14 @@
- ac_save_LIBS="$LIBS"
- LIBS="-l$1 $5 $LIBS"
- AC_TRY_LINK(dnl
--ifelse(AC_LANG, [FORTRAN77], ,
- ifelse([$2], [main], , dnl Avoid conflicting decl of main.
- [/* Override any gcc2 internal prototype to avoid an error.  */
--]ifelse(AC_LANG, CPLUSPLUS, [#ifdef __cplusplus
- extern "C"
- #endif
--])dnl
-+]
- [/* Use this to make sure it works with Tru64 */
- #include <pthread.h>
--])),
-+]),
- 	    [$2(0)],
- 	    eval "ac_cv_lib_$ac_lib_var=yes",
- 	    eval "ac_cv_lib_$ac_lib_var=no")
-@@ -3313,17 +3279,16 @@
- ac_save_LIBS="$LIBS"
- LIBS="-l$1 $5 $LIBS"
- AC_TRY_LINK(dnl
--ifelse(AC_LANG, [FORTRAN77], ,
- ifelse([$2], [main], , dnl Avoid conflicting decl of main.
- [/* Override any gcc2 internal prototype to avoid an error.  */
+@@ -1268,7 +1268,7 @@
+ dnl which includes <sys/select.h> which contains a prototype for
+ dnl select.  Similarly for bzero.
+ [#include <assert.h>
 -]ifelse(AC_LANG, CPLUSPLUS, [#ifdef __cplusplus
 +#ifdef __cplusplus
  extern "C"
  #endif
  ])dnl
- [/* We use char because int might match the return type of a gcc2
-     builtin and then its argument prototype would still apply.  */
- char $2();
--])),
-+],
- 	    [$2()],
- 	    eval "ac_cv_lib_$ac_lib_var=yes",
- 	    eval "ac_cv_lib_$ac_lib_var=no")
-@@ -3390,14 +3355,14 @@
- dnl #   auxilliary macros
- AC_DEFUN(_AC_PTH_ERROR, [dnl
- AC_MSG_RESULT([*FAILED*])
--define(_ac_pth_line,dnl
--"+------------------------------------------------------------------------+")
-+define(`_ac_pth_line',dnl
-+`+------------------------------------------------------------------------+')
- echo " _ac_pth_line" 1>&2
- cat <<EOT | sed -e 's/^[[ 	]]*/ | /' -e 's/>>/  /' 1>&2
- $1
- EOT
- echo " _ac_pth_line" 1>&2
--undefine(_ac_pth_line)
-+undefine(`_ac_pth_line')
- exit 1
- ])
- AC_DEFUN(_AC_PTH_VERBOSE, [dnl
-diff -urN unixODBC-2.1.0/configure.in unixODBC-2.1.0-new/configure.in
---- unixODBC-2.1.0/configure.in	Thu Nov  1 11:58:25 2001
-+++ unixODBC-2.1.0-new/configure.in	Thu Jan 17 15:34:37 2002
-@@ -26,10 +26,9 @@
+diff -Nur unixODBC-2.2.4.orig/configure.in unixODBC-2.2.4/configure.in
+--- unixODBC-2.2.4.orig/configure.in	Wed Nov 20 13:01:27 2002
++++ unixODBC-2.2.4/configure.in	Fri Jan 24 20:16:43 2003
+@@ -26,10 +26,11 @@
      esac],[gui=true])
  
  dnl Only need c++ for the GUI bits
-+dnl but AC_PROG_CC cannot be used conditionally
++dnl but AC_PROG_CXX cannot be used conditionally
  
 -if test "x$gui" = "xtrue"; then
++dnl if test "x$gui" = "xtrue"; then
  AC_PROG_CXX
 -fi
++dnl fi
  
  dnl Check if we want to worry about threads
  
-@@ -320,7 +320,6 @@
-    done
- ])
- 
--AC_SUBST(INCLUDES)
- dnl AC_SUBST(all_includes)
- dnl AC_SUBST(all_libraries)
- 
-@@ -383,7 +383,6 @@
+@@ -460,7 +461,6 @@
      Drivers/txt/doc/Makefile \
      Drivers/odbc/Makefile \
      Drivers/template/Makefile \
 -    Drivers/odbc/Makefile \
-     Drivers/MySQL/Makefile \
      Drivers/MiniSQL/Makefile \
      include/Makefile \
+     doc/Makefile \
