@@ -5,13 +5,6 @@ Version:	2.1.1
 Release:	3
 License:	LGPL
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	ftp://ftp.easysoft.com/pub/beta/%{name}/%{name}-%{version}.tar.gz
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
@@ -43,13 +36,6 @@ unixODBC - kompletne, darmowe/otwarte ODBC dla systemСw UNIX/Linux.
 Summary:	unixODBC header files and development documentation
 Summary(pl):	Pliki nagЁСwkowe i dokunentacja do unixODBC 
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 Obsoletes:	libunixODBC2-devel
 
@@ -63,13 +49,6 @@ Pliki nagЁСwkowe i dokunentacja do unixODBC.
 Summary:	unixODBC static libraries
 Summary(pl):	Biblioteki statyczne unixODBC
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
