@@ -17,10 +17,11 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-am1.4b-fixes.patch
 Patch2:		%{name}-segfault.patch
 Icon:		unixODBC.xpm
+#BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.2
-#BuildRequires:	XFree86-devel
+BuildRequires:	libtool
 #BuildRequires:	qt-devel >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildConflicts:	kdesupport-odbc
@@ -91,9 +92,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-%{__install} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
+#%{__install} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
+#%{__install} %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 %{__install} %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
-%{__install} %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 gzip -9nf AUTHORS NEWS
 
@@ -111,8 +112,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime)  %{_sysconfdir}/odbc*.ini
-%{_applnkdir}/System/*
-%{_pixmapsdir}/*
+#%{_applnkdir}/System/*
+#%{_pixmapsdir}/*
 
 %files devel
 %defattr(644,root,root,755)
