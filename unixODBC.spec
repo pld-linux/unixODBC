@@ -2,7 +2,7 @@ Summary:	unixODBC -a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC
 Name:		unixODBC
 Version:	1.8.13
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -14,7 +14,7 @@ BuildRequires:	automake
 #BuildRequires:	XFree86-devel
 #BuildRequires:	qt-devel >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
+BuildConflicts:	kdesupport-odbc
 %define		_prefix		/usr
 %define		_sysconfdir	/etc
 
