@@ -7,20 +7,21 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.6
-Release:	1.20030624.1
+Release:	2
 License:	LGPL
 Group:		Libraries
+# WARNING: they place snapshots of new versions using %{name}-%{version}.tar.gz
+# scheme - so check for official releases on URL!
 Source0:	ftp://ftp.easysoft.com/pub/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	a442cf6de50b0aca9cb7a984ede25e09
+# Source0-md5:	748ce54e34b2b339c99a8b1ddaee54f5
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
 Source3:	%{name}.png
 Patch0:		%{name}-ac_fix.patch
 Patch1:		%{name}-no_libnsl.patch
 Patch2:		%{name}-libltdl-shared.patch
-Patch3:		%{name}-trailing_backslash.patch
-Patch4:		%{name}-flex.patch
-Patch5:		%{name}-gODBCConfig.patch
+Patch3:		%{name}-flex.patch
+Patch4:		%{name}-gODBCConfig.patch
 Icon:		unixODBC.xpm
 URL:		http://www.unixodbc.com/
 BuildRequires:	autoconf
@@ -131,10 +132,8 @@ DataManagerII, ODBCConfig, odbctest.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
-rm -f missing config.guess config.sub
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -145,9 +144,7 @@ rm -f missing config.guess config.sub
 	--enable-drivers \
 	--enable-shared \
 	--enable-static
-# GUI requires QT2
-#	--enable-gui
-#	--with-qt-dir=%{_prefix}
+
 %{__make}
 
 %if 0%{!?_without_gnome:1}

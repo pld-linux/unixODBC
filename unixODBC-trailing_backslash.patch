@@ -1,9 +1,0 @@
-diff -urN unixODBC-2.2.6.orig/doc/Makefile.am unixODBC-2.2.6/doc/Makefile.am
---- unixODBC-2.2.6.orig/doc/Makefile.am	Wed Oct 17 16:40:15 2001
-+++ unixODBC-2.2.6/doc/Makefile.am	Fri May 23 14:22:45 2003
-@@ -7,4 +7,4 @@
- EXTRA_DIST = \
- 	index.html \
- 	smallbook.gif \
--	unixODBC.gif \
-+	unixODBC.gif
