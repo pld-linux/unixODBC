@@ -1,0 +1,33 @@
+--- unixODBC-2.2.11/DataManager/Makefile.am.orig	2004-09-13 16:46:11.000000000 +0200
++++ unixODBC-2.2.11/DataManager/Makefile.am	2005-03-26 23:02:05.259271424 +0100
+@@ -8,7 +8,7 @@
+ 	@QT_LDFLAGS@ \
+ 	@USER_LDFLAGS@ \
+ 	@LIB_QT@ \
+-	../odbcinst/libodbcinst.la \
++	../odbcinst/libodbcinst.la ../ini/libinilc.la \
+ 	../DriverManager/libodbc.la 
+ 
+ DataManager_DEPENDANCIES = \
+--- unixODBC-2.2.11/DataManagerII/Makefile.am.orig	2004-11-20 13:57:38.000000000 +0100
++++ unixODBC-2.2.11/DataManagerII/Makefile.am	2005-03-26 23:02:18.433268672 +0100
+@@ -8,7 +8,7 @@
+ 	@QT_LDFLAGS@ \
+ 	@USER_LDFLAGS@ \
+ 	@LIB_QT@ \
+-	../odbcinst/libodbcinst.la \
++	../odbcinst/libodbcinst.la ../ini/libinilc.la \
+ 	../DriverManager/libodbc.la 
+ 
+ DataManagerII_DEPENDANCIES = \
+--- unixODBC-2.2.11/odbctest/Makefile.am.orig	2004-09-13 16:47:34.000000000 +0200
++++ unixODBC-2.2.11/odbctest/Makefile.am	2005-03-26 23:55:44.786828840 +0100
+@@ -8,7 +8,7 @@
+ 	@QT_LDFLAGS@ \
+ 	@USER_LDFLAGS@ \
+ 	@LIB_QT@ \
+-	../odbcinst/libodbcinst.la \
++	../odbcinst/libodbcinst.la ../ini/libinilc.la \
+ 	../DriverManager/libodbc.la \
+ 	$(LIBLTDL) $(LIBADD_DL)
+ 
