@@ -6,6 +6,6 @@ Exec=DataManager
 Icon=unixODBC.png
 MiniIcon=smallLinuxODBC.xpm
 Type=Application
-Terminal=0
+Terminal=false
 Encoding=UTF-8
 # vi: encoding=utf-8
