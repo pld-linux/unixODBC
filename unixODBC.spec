@@ -66,7 +66,7 @@ Biblioteki statyczne unixODBC.
 
 %build
 rm -f missing config.guess config.sub
-aclocal
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 %configure \
