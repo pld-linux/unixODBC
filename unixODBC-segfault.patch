@@ -1,0 +1,17 @@
+--- unixODBC-2.0.6/exe/isql.c.segfault	Wed Apr 25 16:26:22 2001
++++ unixODBC-2.0.6/exe/isql.c	Wed Apr 25 17:02:16 2001
+@@ -105,9 +105,11 @@
+ 		{
+ 			char *line;
+ 			line=readline("SQL> ");
+-			strncpy(szSQL, line, sizeof(szSQL));
+-			add_history(line);
+-			free(line);
++                        if(!line) /* EOF - ctrl-d */
++                            line=strdup("quit");
++                        strncpy(szSQL, line, sizeof(szSQL));
++                        add_history(line);
++                        free(line);
+ 		} else 
+ #endif
+ 		fgets( szSQL, sizeof(szSQL), stdin );
