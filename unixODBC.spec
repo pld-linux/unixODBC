@@ -121,7 +121,7 @@ EOF
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS doc/*
+%doc ChangeLog NEWS
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/odbc*.ini
@@ -130,7 +130,7 @@ EOF
 
 %files devel
 %defattr(644,root,root,755)
-%doc {AUTHORS,NEWS}.gz doc/*
+%doc AUTHORS NEWS doc/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*.h
