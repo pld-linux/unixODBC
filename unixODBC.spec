@@ -2,9 +2,10 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.6
-Release:	1
+Release:	1.20030324.1
 License:	LGPL
 Group:		Libraries
+# Source0-md5:	8c225e18937b89974e747f2e91fd5e8f
 Source0:	ftp://ftp.easysoft.com/pub/%{name}/%{name}-%{version}.tar.gz
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
