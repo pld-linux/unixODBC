@@ -68,7 +68,7 @@ Biblioteki statyczne unixODBC.
 rm -f missing config.guess config.sub
 aclocal
 autoconf
-automake -a -c
+automake -a -c -f
 %configure \
 	--disable-gui \
 	--enable-threads \
