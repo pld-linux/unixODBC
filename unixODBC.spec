@@ -1,4 +1,4 @@
-Summary:	unixODBC
+Summary:	unixODBC -a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC
 Name:		unixODBC
 Version:	1.8.6	
@@ -16,34 +16,33 @@ Buildroot:	/tmp/%{name}-%{version}-root
 %define		_sysconfdir	/etc
 
 %description
-
-
-%description -l pl
-
+unixODBC is a complete, free/open, ODBC solution for UNIX/Linux.
 
 %package devel
-Summary:	unixODBC
-Summary(pl):	unixODBC
+Summary:	unixODBC header files and development documentation
+Summary(pl):	Pliki nag³ówkowe i dokunentacja do unixODBC 
 Group:		Development/Libraries
 Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
 
 %description devel
+unixODBC header files and development documentation.
 
-
-%description -l pl devel
-
+%description -l pl
+Pliki nag³ówkowe i dokunentacja do unixODBC.
 
 %package static
-Summary:	unixODBC
-Summary(pl):	unixODBC
+Summary:	unixODBC static libraries
+Summary(pl):	Biblioteki statyczne unixODBC
 Group:		Development/Libraries
 Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}-devel = %{version}
 
 %description static
-
+unixODBC static libraries.
 
 %description -l pl static
-
+Biblioteki statyczne unixODBC.
 
 %prep
 %setup -q 
@@ -66,13 +65,16 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 make DESTDIR=$RPM_BUILD_ROOT install
 
 gzip -9fn AUTHORS NEWS
 
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*.*
+
 find doc -name Makefile\* -exec rm {} \;
 
-%post -p /sbin/ldconfig
+%post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %clean
