@@ -1,17 +1,6 @@
 diff -Nur unixODBC-2.2.4.orig/acinclude.m4 unixODBC-2.2.4/acinclude.m4
 --- unixODBC-2.2.4.orig/acinclude.m4	Fri Jan  3 17:04:44 2003
 +++ unixODBC-2.2.4/acinclude.m4	Fri Jan 24 20:15:02 2003
-@@ -337,8 +337,8 @@
- ac_x_libraries=$kde_x_libraries
- ac_x_includes=$kde_x_includes
- 
--AC_PATH_X_DIRECT
--AC_PATH_X_XMKMF
-+_AC_PATH_X_DIRECT
-+_AC_PATH_X_XMKMF
- 
- if test -z "$ac_x_includes"; then
- ac_x_includes="."
 @@ -1268,7 +1268,7 @@
  dnl which includes <sys/select.h> which contains a prototype for
  dnl select.  Similarly for bzero.
@@ -21,28 +10,3 @@ diff -Nur unixODBC-2.2.4.orig/acinclude.m4 unixODBC-2.2.4/acinclude.m4
  extern "C"
  #endif
  ])dnl
-diff -Nur unixODBC-2.2.4.orig/configure.in unixODBC-2.2.4/configure.in
---- unixODBC-2.2.4.orig/configure.in	Wed Nov 20 13:01:27 2002
-+++ unixODBC-2.2.4/configure.in	Fri Jan 24 20:16:43 2003
-@@ -26,10 +26,11 @@
-     esac],[gui=true])
- 
- dnl Only need c++ for the GUI bits
-+dnl but AC_PROG_CXX cannot be used conditionally
- 
--if test "x$gui" = "xtrue"; then
-+dnl if test "x$gui" = "xtrue"; then
- AC_PROG_CXX
--fi
-+dnl fi
- 
- dnl Check if we want to worry about threads
- 
-@@ -460,7 +461,6 @@
-     Drivers/txt/doc/Makefile \
-     Drivers/odbc/Makefile \
-     Drivers/template/Makefile \
--    Drivers/odbc/Makefile \
-     Drivers/MiniSQL/Makefile \
-     include/Makefile \
-     doc/Makefile \
