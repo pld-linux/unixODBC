@@ -34,7 +34,7 @@ unixODBC - kompletne, darmowe/otwarte ODBC dla systemów UNIX/Linux.
 
 %package devel
 Summary:	unixODBC header files and development documentation
-Summary(pl):	Pliki nag³ówkowe i dokunentacja do unixODBC 
+Summary(pl):	Pliki nag³ówkowe i dokunentacja do unixODBC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
 Obsoletes:	libunixODBC2-devel
@@ -58,7 +58,7 @@ unixODBC static libraries.
 Biblioteki statyczne unixODBC.
 
 %prep
-%setup -q 
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -74,11 +74,11 @@ automake -a -c
 	--enable-threads \
 	--enable-drivers \
 	--enable-shared \
-	--enable-static 
-# GUI requires QT2	
-#	--enable-gui 
-#	--with-qt-dir=%{_prefix} 
-%{__make} 
+	--enable-static
+# GUI requires QT2
+#	--enable-gui
+#	--with-qt-dir=%{_prefix}
+%{__make}
 
 # avoid relinking in some dirs
 for f in cur/libodbccr.la samples/libboundparam.la ; do
@@ -139,5 +139,5 @@ EOF
 
 %files static
 %defattr(644,root,root,755)
-%attr(644,root,root) 
+%attr(644,root,root)
 %{_libdir}/lib*.a
