@@ -1,16 +1,7 @@
---- unixODBC-2.0.7/configure.in~	Tue May  1 19:45:14 2001
-+++ unixODBC-2.0.7/configure.in	Sat May 19 09:06:13 2001
-@@ -255,7 +255,6 @@
-    done
- ])
- 
--AC_SUBST(INCLUDES)
- dnl AC_SUBST(all_includes)
- dnl AC_SUBST(all_libraries)
- 
---- unixODBC-2.0.8/acinclude.m4.orig	Wed Jun 13 11:52:05 2001
-+++ unixODBC-2.0.8/acinclude.m4	Sun Aug 12 19:47:54 2001
-@@ -329,8 +329,8 @@
+diff -urN unixODBC-2.1.0/acinclude.m4 unixODBC-2.1.0-new/acinclude.m4
+--- unixODBC-2.1.0/acinclude.m4	Tue Nov 20 14:32:00 2001
++++ unixODBC-2.1.0-new/acinclude.m4	Thu Jan 17 15:38:27 2002
+@@ -337,8 +337,8 @@
  ac_x_libraries=$kde_x_libraries
  ac_x_includes=$kde_x_includes
  
@@ -21,15 +12,16 @@
  if test -z "$ac_x_includes"; then
  ac_x_includes="."
  fi
-@@ -423,7 +423,6 @@
+@@ -431,8 +431,6 @@
  them either.])
  fi
  
 -])
- 
+-
  AC_LANG_RESTORE
  ])
-@@ -1911,36 +1910,6 @@
+ 
+@@ -2156,36 +2154,6 @@
      fi
    fi])
   
@@ -66,7 +58,7 @@
  # Macro to add for using GNU gettext.
  # Ulrich Drepper <drepper@cygnus.com>, 1995.
  
-@@ -3014,16 +2983,15 @@
+@@ -3259,16 +3227,14 @@
  ac_save_LIBS="$LIBS"
  LIBS="-l$1 $5 $LIBS"
  AC_TRY_LINK(dnl
@@ -74,7 +66,6 @@
  ifelse([$2], [main], , dnl Avoid conflicting decl of main.
  [/* Override any gcc2 internal prototype to avoid an error.  */
 -]ifelse(AC_LANG, CPLUSPLUS, [#ifdef __cplusplus
-+#ifdef __cplusplus
  extern "C"
  #endif
 -])dnl
@@ -86,7 +77,7 @@
  	    [$2(0)],
  	    eval "ac_cv_lib_$ac_lib_var=yes",
  	    eval "ac_cv_lib_$ac_lib_var=no")
-@@ -3068,17 +3036,16 @@
+@@ -3313,17 +3279,16 @@
  ac_save_LIBS="$LIBS"
  LIBS="-l$1 $5 $LIBS"
  AC_TRY_LINK(dnl
@@ -106,7 +97,7 @@
  	    [$2()],
  	    eval "ac_cv_lib_$ac_lib_var=yes",
  	    eval "ac_cv_lib_$ac_lib_var=no")
-@@ -3145,14 +3112,14 @@
+@@ -3390,14 +3355,14 @@
  dnl #   auxilliary macros
  AC_DEFUN(_AC_PTH_ERROR, [dnl
  AC_MSG_RESULT([*FAILED*])
@@ -124,3 +115,14 @@
  exit 1
  ])
  AC_DEFUN(_AC_PTH_VERBOSE, [dnl
+diff -urN unixODBC-2.1.0/configure.in unixODBC-2.1.0-new/configure.in
+--- unixODBC-2.1.0/configure.in	Thu Nov  1 11:58:25 2001
++++ unixODBC-2.1.0-new/configure.in	Thu Jan 17 15:34:37 2002
+@@ -320,7 +320,6 @@
+    done
+ ])
+ 
+-AC_SUBST(INCLUDES)
+ dnl AC_SUBST(all_includes)
+ dnl AC_SUBST(all_libraries)
+ 
