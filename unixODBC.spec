@@ -6,14 +6,14 @@
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
-Version:	2.2.8
+Version:	2.2.9
 Release:	1
 License:	LGPL
 Group:		Libraries
 # WARNING: they place snapshots of new versions using %{name}-%{version}.tar.gz
 # scheme - so check for official releases on URL!
-Source0:	ftp://ftp.easysoft.com/pub/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	1738ac06c5fae51fe214993cf8b3bf2b
+Source0:	ftp://ftp.easysoft.com/pub/unixODBC/%{name}-%{version}.tar.gz
+# Source0-md5:	6a5379f41e4e1aa6710f18e2486d14e2
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
 Source3:	ODBCtest.desktop
@@ -23,6 +23,7 @@ Patch1:		%{name}-no_libnsl.patch
 Patch2:		%{name}-libltdl-shared.patch
 Patch3:		%{name}-flex.patch
 Patch4:		%{name}-gODBCConfig.patch
+Patch5:		%{name}-syntax.patch
 Icon:		unixODBC.xpm
 URL:		http://www.unixodbc.com/
 BuildRequires:	autoconf
@@ -133,6 +134,7 @@ DataManagerII, ODBCConfig, odbctest.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -223,6 +225,8 @@ EOF
 %attr(755,root,root) %{_bindir}/isql
 %attr(755,root,root) %{_bindir}/iusql
 %attr(755,root,root) %{_bindir}/odbcinst
+# can be useful not only for development
+%attr(755,root,root) %{_bindir}/odbc_config
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
 %{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
