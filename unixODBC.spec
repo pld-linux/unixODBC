@@ -12,8 +12,10 @@ Source0:	ftp://ftp.easysoft.com/pub/beta/%{name}/%{name}-%{version}.tar.gz
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
 Source3:	odbcinst.ini
+Source4:	%{name}.png
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-am1.4b-fixes.patch
+Icon:		unixODBC.xpm
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel
@@ -83,12 +85,13 @@ automake -a -c
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/System
+install -d $RPM_BUILD_ROOT%{%{_applnkdir}/System,%{_pixmapsdir}}
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
-install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
+%{__install} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/System
+%{__install} %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
+%{__install} %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 gzip -9nf AUTHORS NEWS
 
@@ -107,6 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 size mtime)  %{_sysconfdir}/odbc*.ini
 %{_applnkdir}/System/*
+%{_pixmapsdir}/*
 
 %files devel
 %defattr(644,root,root,755)
