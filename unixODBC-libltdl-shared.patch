@@ -1,0 +1,33 @@
+diff -Nur unixODBC-2.1.1.orig/Makefile.am unixODBC-2.1.1/Makefile.am
+--- unixODBC-2.1.1.orig/Makefile.am	Sat Jan 19 16:52:00 2002
++++ unixODBC-2.1.1/Makefile.am	Sat Jan 19 16:54:55 2002
+@@ -3,7 +3,6 @@
+     log \
+ 	lst \
+ 	ini \
+-    libltdl \
+ 	odbcinst \
+ 	DriverManager \
+ 	odbcinstQ \
+diff -Nur unixODBC-2.1.1.orig/configure.in unixODBC-2.1.1/configure.in
+--- unixODBC-2.1.1.orig/configure.in	Sat Jan 19 16:52:00 2002
++++ unixODBC-2.1.1/configure.in	Sat Jan 19 16:54:31 2002
+@@ -77,7 +77,7 @@
+ 
+ dnl Enable building of the convenience library
+ dnl and set LIBLTDL accordingly
+-AC_LIBLTDL_CONVENIENCE
++AC_LIBLTDL_INSTALLABLE
+ dnl Substitute INCLTDL and LIBLTDL in the Makefiles
+ AC_SUBST(INCLTDL)
+ AC_SUBST(LIBLTDL)
+@@ -88,9 +88,6 @@
+ dnl Configure libtool
+ AM_PROG_LIBTOOL
+ 
+-dnl Configure libltdl
+-AC_CONFIG_SUBDIRS(libltdl)
+-
+ dnl Find shared lib extension
+ AC_LTDL_SHLIBEXT
+ SHLIBEXT="$libltdl_cv_shlibext"

@@ -2,7 +2,7 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuxa
 Name:		unixODBC
 Version:	2.1.1
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -19,6 +19,7 @@ Source3:	%{name}.png
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-ac_fix.patch
 Patch2:		%{name}-no_libnsl.patch
+Patch3:		%{name}-libltdl-shared.patch
 Icon:		unixODBC.xpm
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -81,13 +82,13 @@ Biblioteki statyczne unixODBC.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 rm -f missing config.guess config.sub
 aclocal
 autoconf
 automake -a -c
-(cd libltdl ; autoconf)
 %configure \
 	--disable-gui \
 	--enable-threads \
