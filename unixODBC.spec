@@ -13,7 +13,9 @@ Source3:	%{name}.png
 Patch0:		%{name}-ac_fix.patch
 Patch1:		%{name}-no_libnsl.patch
 Patch2:		%{name}-libltdl-shared.patch
+Patch3:		%{name}-trailing_backslash.patch
 Icon:		unixODBC.xpm
+URL:		http://www.unixodbc.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libltdl-devel
@@ -64,6 +66,7 @@ Biblioteki statyczne unixODBC.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 rm -f missing config.guess config.sub
