@@ -79,7 +79,7 @@ Requires:	%{name} = %{version}-%{release}
 GNOME library (libgtkodbcconfig) and configuration GUI (gODBCConfig)
 for unixODBC.
 
-%description gnome
+%description gnome -l pl
 Oparta na GNOME biblioteka (libgtkodbcconfig) i graficzny konfigurator
 (gODBCConfig) do unixODBC.
 
