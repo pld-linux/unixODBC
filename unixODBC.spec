@@ -22,7 +22,6 @@ BuildRequires:	readline-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildConflicts:	kdesupport-odbc
 
-%define		_prefix		/usr
 %define		_sysconfdir	/etc
 
 %description
