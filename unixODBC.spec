@@ -1,7 +1,7 @@
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuxa
 Name:		unixODBC
-Version:	2.1.0
+Version:	2.1.1
 Release:	1
 License:	LGPL
 Group:		Libraries
@@ -18,7 +18,7 @@ Source2:	ODBCConfig.desktop
 Source3:	%{name}.png
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-ac_fix.patch
-Patch2:		%{name}-am_fix.patch
+Patch2:		%{name}-no_libnsl.patch
 Icon:		unixODBC.xpm
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -27,6 +27,7 @@ BuildRequires:	readline-devel >= 4.2
 #BuildRequires:	qt-devel >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildConflicts:	kdesupport-odbc
+Obsoletes:	libunixODBC2
 
 %define		_sysconfdir	/etc
 
@@ -37,8 +38,7 @@ unixODBC is a complete, free/open, ODBC solution for UNIX/Linux.
 unixODBC - kompletne, darmowe/otwarte ODBC dla systemСw UNIX/Linux.
 
 %package devel
-Summary
-:	unixODBC header files and development documentation
+Summary:	unixODBC header files and development documentation
 Summary(pl):	Pliki nagЁСwkowe i dokunentacja do unixODBC 
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
@@ -49,6 +49,7 @@ Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(ru):	Разработка/Библиотеки
 Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
+Obsoletes:	libunixODBC2-devel
 
 %description devel
 unixODBC header files and development documentation.
@@ -79,7 +80,7 @@ Biblioteki statyczne unixODBC.
 %setup -q 
 %patch0 -p1
 %patch1 -p1
-#%patch2 -p1
+%patch2 -p1
 
 %build
 rm -f missing config.guess config.sub
@@ -150,7 +151,7 @@ EOF
 
 %files devel
 %defattr(644,root,root,755)
-doc {AUTHORS,NEWS}.gz doc/*
+%doc {AUTHORS,NEWS}.gz doc/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*.h
