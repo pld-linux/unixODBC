@@ -68,7 +68,7 @@ Biblioteki statyczne unixODBC.
 %patch1 -p1
 
 %build
-libtoolize --force
+libtoolize --copy --force
 aclocal
 autoconf
 automake -a -c
