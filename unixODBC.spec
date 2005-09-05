@@ -7,7 +7,7 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.11
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 # WARNING: they place snapshots of new versions using %{name}-%{version}.tar.gz
@@ -147,7 +147,12 @@ DataManagerII, ODBCConfig, odbctest.
 %{__autoconf}
 %{__automake}
 %configure \
-	--%{!?with_qt:dis}%{?with_qt:en}able-gui \
+%if %{with qt}
+	--enable-gui \
+	--with-qt-libraries=%{_libdir} \
+%else
+	--disable-gui \
+%endif
 	--enable-threads \
 	--enable-drivers \
 	--enable-shared \
@@ -187,13 +192,13 @@ install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 find doc -name Makefile\* -exec rm -f {} \;
 
 # libodbcinstQ.so.1 is lt_dlopened
-rm -f $RPM_BUILD_ROOT%{_libdir}/libodbcinstQ.{so,la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/libodbcinstQ.{la,a}
 # libodbccr.so.1. is lt_dlopened
-rm -f $RPM_BUILD_ROOT%{_libdir}/libodbccr.{so,la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/libodbccr.{la,a}
 # Setup drivers are lt_dlopened by given name (let it be SONAME)
-rm -f $RPM_BUILD_ROOT%{_libdir}/lib{odbc{mini,my,psql,drvcfg{1,2},nn,txt},oraodbc,esoob,oplodbc,sapdb,tds}S.{so,la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/lib{odbc{mini,my,psql,drvcfg{1,2},nn,txt},oraodbc,esoob,oplodbc,sapdb,tds}S.{la,a}
 # Drivers are lt_dlopened by given name (let it be SONAME)
-rm -f $RPM_BUILD_ROOT%{_libdir}/lib{odbcpsql,nn,template,odbctxt}.{so,la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/lib{odbcpsql,nn,template,odbctxt}.{la,a}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
