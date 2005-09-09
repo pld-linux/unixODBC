@@ -238,6 +238,24 @@ EOF
 # can be useful not only for development
 %attr(755,root,root) %{_bindir}/odbc_config
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+# for *dlopening
+%attr(755,root,root) %{_libdir}/libodbccr.so
+%attr(755,root,root) %{_libdir}/libodbcminiS.so
+%attr(755,root,root) %{_libdir}/libodbcmyS.so
+%attr(755,root,root) %{_libdir}/libodbcpsqlS.so
+%attr(755,root,root) %{_libdir}/libodbcdrvcfg1S.so
+%attr(755,root,root) %{_libdir}/libodbcdrvcfg2S.so
+%attr(755,root,root) %{_libdir}/libodbcnnS.so
+%attr(755,root,root) %{_libdir}/libodbctxtS.so
+%attr(755,root,root) %{_libdir}/liboraodbcS.so
+%attr(755,root,root) %{_libdir}/libesoobS.so
+%attr(755,root,root) %{_libdir}/liboplodbcS.so
+%attr(755,root,root) %{_libdir}/libsapdbS.so
+%attr(755,root,root) %{_libdir}/libtdsS.so
+%attr(755,root,root) %{_libdir}/libodbcpsql.so
+%attr(755,root,root) %{_libdir}/libnn.so
+%attr(755,root,root) %{_libdir}/libtemplate.so
+%attr(755,root,root) %{_libdir}/libodbctxt.so
 %{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
 %{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/odbc*.ini
@@ -245,7 +263,9 @@ EOF
 %files devel
 %defattr(644,root,root,755)
 %doc ChangeLog doc/ProgrammerManual
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/libboundparam.so
+%attr(755,root,root) %{_libdir}/libodbc.so
+%attr(755,root,root) %{_libdir}/libodbcinst.so
 %{_libdir}/lib*.la
 %{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
 %{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
@@ -284,6 +304,7 @@ EOF
 %attr(755,root,root) %{_bindir}/ODBCConfig
 %attr(755,root,root) %{_bindir}/odbctest
 %attr(755,root,root) %{_libdir}/libodbcinstQ.so.*.*.*
+%attr(755,root,root) %{_libdir}/libodbcinstQ.so
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %endif
