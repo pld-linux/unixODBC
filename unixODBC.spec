@@ -36,8 +36,8 @@ BuildRequires:	gettext-devel
 %{?with_gnome1:BuildRequires:	gnome-libs-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool >= 1:1.4.2-9
-BuildRequires:	readline-devel >= 4.2
 %{?with_qt:BuildRequires:	qt-devel >= 2.0}
+BuildRequires:	readline-devel >= 4.2
 Requires(post):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildConflicts:	kdesupport-odbc
@@ -258,7 +258,7 @@ EOF
 %attr(755,root,root) %{_libdir}/libodbctxt.so
 %{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
 %{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/odbc*.ini
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbc*.ini
 
 %files devel
 %defattr(644,root,root,755)
