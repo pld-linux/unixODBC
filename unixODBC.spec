@@ -28,7 +28,6 @@ Patch4:		%{name}-gODBCConfig.patch
 # but what about other projects using ODBC?
 Patch5:		%{name}-types.patch
 Patch6:		%{name}-libini.patch
-Icon:		unixODBC.xpm
 URL:		http://www.unixodbc.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
