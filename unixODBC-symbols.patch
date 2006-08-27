@@ -1,0 +1,38 @@
+--- unixODBC-2.2.11/sqp/sqpStoreDataType.c.orig	2004-07-26 10:34:47.000000000 +0200
++++ unixODBC-2.2.11/sqp/sqpStoreDataType.c	2006-08-27 18:23:27.375835500 +0200
+@@ -9,6 +9,13 @@
+ #include "sqp.h"
+ #include <sqlext.h>
+ 
++#ifndef WIN32
++#ifndef HAVE_STRICMP
++#define stricmp(s1,s2) 		strcasecmp(s1,s2)
++#define strnicmp(s1,s2,n)	strncasecmp(s1,s2,n)
++#endif
++#endif
++
+ void sqpStoreDataType( char *pszType, int nPrecision, int nScale )
+ {
+     HSQPDATATYPE    hDataType;
+--- unixODBC-2.2.11/cur/SQLConnect.c.orig	2002-11-25 16:37:54.000000000 +0100
++++ unixODBC-2.2.11/cur/SQLConnect.c	2006-08-27 18:26:27.487091750 +0200
+@@ -275,7 +275,7 @@
+ 
+     if ( !( cl_connection -> functions = malloc( sizeof( cl_template_func ))))
+     {
+-        dm_log_write( "CL " __FILE__,
++        dh -> dm_log_write( "CL " __FILE__,
+                 __LINE__,
+                 LOG_INFO,
+                 LOG_INFO,
+--- unixODBC-2.2.11/cur/SQLSetStmtOption.c.orig	2003-03-05 10:48:45.000000000 +0100
++++ unixODBC-2.2.11/cur/SQLSetStmtOption.c	2006-08-27 18:27:52.680416000 +0200
+@@ -155,7 +155,7 @@
+ 
+     if ( ret == SQL_SUCCESS_WITH_INFO )
+     {
+-        __post_internal_error( &cl_statement -> dm_statement -> error,
++        cl_statement -> cl_connection -> dh.__post_internal_error( &cl_statement -> dm_statement -> error,
+                     ERROR_01S02, NULL,
+                     cl_statement -> dm_statement -> connection -> 
+                         environment -> requested_version );
