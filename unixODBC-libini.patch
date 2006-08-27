@@ -31,3 +31,14 @@
  	../DriverManager/libodbc.la \
  	$(LIBLTDL) $(LIBADD_DL)
  
+--- unixODBC-2.2.11/odbcinstQ/Makefile.am.orig	2004-09-13 15:39:14.000000000 +0200
++++ unixODBC-2.2.11/odbcinstQ/Makefile.am	2006-08-27 18:11:03.917372250 +0200
+@@ -16,7 +16,7 @@
+ 	@USER_LDFLAGS@ \
+ 	@LIB_QT@ \
+ 	../odbcinst/libodbcinst.la \
+-	../extras/libodbcextraslc.la \
++	../ini/libinilc.la \
+ 	../DriverManager/libodbc.la 
+ 
+ libodbcinstQ_la_DEPENDENCIES = \
