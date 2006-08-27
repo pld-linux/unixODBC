@@ -157,8 +157,7 @@ DataManagerII, ODBCConfig, odbctest.
 	--enable-threads \
 	--enable-drivers \
 	--enable-shared \
-	--enable-static \
-	--x-includes=/usr/include
+	--enable-static
 
 %{__make}
 
