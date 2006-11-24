@@ -6,29 +6,27 @@
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
-Version:	2.2.11
-Release:	7
+Version:	2.2.12
+Release:	0.1
 License:	LGPL
 Group:		Libraries
-# WARNING: they place snapshots of new versions using %{name}-%{version}.tar.gz
+# WARNING: they used to place snapshots of new versions using %{name}-%{version}.tar.gz
 # scheme - so check for official releases on URL!
 Source0:	ftp://ftp.easysoft.com/pub/unixODBC/%{name}-%{version}.tar.gz
-# Source0-md5:	9ae806396844e38244cf65ad26ba0f23
+# Source0-md5:	9a116aad4059c31d231b626ffdf1869a
 Source1:	DataManager.desktop
 Source2:	ODBCConfig.desktop
 Source3:	ODBCtest.desktop
 Source4:	%{name}.png
-Patch0:		%{name}-ac_fix.patch
-Patch1:		%{name}-no_libnsl.patch
-Patch2:		%{name}-libltdl-shared.patch
-Patch3:		%{name}-flex.patch
-Patch4:		%{name}-gODBCConfig.patch
+Patch0:		%{name}-no_libnsl.patch
+Patch1:		%{name}-libltdl-shared.patch
+Patch2:		%{name}-flex.patch
+Patch3:		%{name}-gODBCConfig.patch
 # XXX: this may be evil, depending on what uses these types.
 # only two Win32-specific functions from unixODBC sources use them,
 # but what about other projects using ODBC?
-Patch5:		%{name}-types.patch
-Patch6:		%{name}-libini.patch
-Patch7:		%{name}-symbols.patch
+Patch4:		%{name}-types.patch
+Patch5:		%{name}-symbols.patch
 URL:		http://www.unixodbc.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -139,8 +137,6 @@ DataManagerII, ODBCConfig, odbctest.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 %build
 %{__libtoolize}
