@@ -146,14 +146,14 @@ DataManagerII, ODBCConfig, odbctest.
 %configure \
 %if %{with qt}
 	--enable-gui \
+	--with-qt-includes=/usr/include/qt \
 	--with-qt-libraries=%{_libdir} \
 %else
 	--disable-gui \
 %endif
-	--enable-threads \
 	--enable-drivers \
-	--enable-shared \
 	--enable-static \
+	--enable-threads \
 	--x-includes=/usr/include
 
 %{__make}
