@@ -1,14 +1,6 @@
---- unixODBC-2.2.6/sqp/lex.l.orig	Wed Oct 17 18:40:32 2001
-+++ unixODBC-2.2.6/sqp/lex.l	Thu Jul 10 11:23:35 2003
-@@ -178,6 +178,7 @@
- 
- '[^'\n]*$	{ 
- 			yyerror( "Unterminated string" ); 
-+			YY_FLUSH_BUFFER;
- 		}
- 
-  /***************************************
-@@ -236,8 +237,6 @@
+--- unixODBC-2.2.12/sqp/lex.l.orig	2005-10-12 10:20:04.000000000 +0200
++++ unixODBC-2.2.12/sqp/lex.l	2006-11-24 14:10:55.239505000 +0100
+@@ -49,8 +49,6 @@
  void yyerror( char *s )
  {
  	sprintf( g_szError, "%s processing '%s' on line %d", s, yytext, g_nLineNo );
@@ -17,3 +9,11 @@
  }
  
  /**********************************************************************
+@@ -224,6 +222,7 @@
+ 
+ '[^'\n]*$	{ 
+ 			yyerror( "Unterminated string" ); 
++			YY_FLUSH_BUFFER;
+ 		}
+ 
+  /***************************************

@@ -8,10 +8,10 @@
  	odbcinst \
  	DriverManager \
  	odbcinstQ \
---- unixODBC-2.2.9/configure.in.orig	2004-07-07 20:09:10.724120144 +0200
-+++ unixODBC-2.2.9/configure.in	2004-07-07 20:29:03.316818496 +0200
-@@ -135,15 +135,13 @@
- AC_MSG_CHECKING( Have we enabled using RTDL_GROUP )
+--- unixODBC-2.2.12/configure.in.orig	2006-11-24 14:08:23.129505000 +0100
++++ unixODBC-2.2.12/configure.in	2006-11-24 14:09:58.329505000 +0100
+@@ -151,11 +151,10 @@
+ AC_MSG_CHECKING( Have we enabled using RTLD_GROUP )
  if test "x$rtldgroup" = "xtrue"; then
  AC_MSG_RESULT( yes )
 -AC_LIBLTDL_CONVENIENCE
@@ -23,7 +23,13 @@
  
  dnl Check for dlopen support
  AC_LIBTOOL_DLOPEN
--AC_CONFIG_SUBDIRS(libltdl)
- 
+@@ -163,9 +162,6 @@
  dnl Configure libtool
  AM_PROG_LIBTOOL
+ 
+-dnl Configure libltdl
+-AC_CONFIG_SUBDIRS(libltdl)
+-
+ use_builtin_libtool="no"
+ 
+ dnl override the libtool lines if we use the system libs

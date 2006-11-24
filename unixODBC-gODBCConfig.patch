@@ -1,6 +1,6 @@
---- unixODBC-2.2.11/gODBCConfig/src/Makefile.am.orig	2004-09-29 16:23:50.000000000 +0200
-+++ unixODBC-2.2.11/gODBCConfig/src/Makefile.am	2005-03-27 12:45:46.264419832 +0200
-@@ -21,13 +21,14 @@
+--- unixODBC-2.2.12/gODBCConfig/src/Makefile.am.orig	2005-09-17 15:08:16.000000000 +0200
++++ unixODBC-2.2.12/gODBCConfig/src/Makefile.am	2006-11-24 14:12:29.549505000 +0100
+@@ -21,13 +21,12 @@
  	support.c support.h \
  	interface.h \
  	callbacks.c callbacks.h
@@ -8,19 +8,29 @@
 +		$(GNOME_LIBDIR) $(GNOMEUI_LIBS) \
 +		../../odbcinst/libodbcinst.la ../../ini/libinilc.la
  
- gODBCConfig_DEPENDENCIES = libgtkodbcconfig.la
+ gODBCConfig_DEPENDENCIES = libgtkodbcconfig.la ../../ini/libinilc.la
  
 -gODBCConfig_LDADD = $(GNOME_LIBDIR) \
 -		$(GNOMEUI_LIBS) \
 +gODBCConfig_LDADD = \
  		$(INTLLIBS) \
 -		-L$(ODBCLIBS) $(ODBCLIB) \
- 		libgtkodbcconfig.la 
- 		
+-		libgtkodbcconfig.la \
+-		../../odbcinst/libodbcinst.la \
+-		../../ini/libinilc.la
++		libgtkodbcconfig.la
+--- unixODBC-2.2.12/gODBCConfig/configure.in.orig	2005-09-16 20:09:56.000000000 +0200
++++ unixODBC-2.2.12/gODBCConfig/configure.in	2006-11-24 15:23:16.209505000 +0100
+@@ -21,7 +21,7 @@
+ dnl Add the languages which your application supports here.
+ ALL_LINGUAS=""
+ AM_GNU_GETTEXT([external])
+-AM_GNU_GETTEXT_VERSION(0.11.4
++AM_GNU_GETTEXT_VERSION(0.11.4)
  
---- unixODBC-2.2.6/gODBCConfig/configure.in.orig	2003-07-21 12:56:54.000000000 +0200
-+++ unixODBC-2.2.6/gODBCConfig/configure.in	2003-08-09 10:37:38.000000000 +0200
-@@ -45,29 +45,6 @@
+ dnl Set PACKAGE_LOCALE_DIR in config.h.
+ if test "x${prefix}" = "xNONE"; then
+@@ -47,29 +47,6 @@
  fi
  ])
  odbcdir=""
@@ -50,11 +60,12 @@
  
  dnl Keep autoheader happy
  AC_DEFINE([ENABLE_NLS], [], [Description])
-@@ -79,7 +56,6 @@
+@@ -81,8 +58,7 @@
  AC_DEFINE([PACKAGE_LOCALE_DIR], [], [Description])
  
  AC_OUTPUT([ Makefile 
--macros/Makefile
+ macros/Makefile
  src/Makefile
- po/Makefile.in
+-po/Makefile.in
  ])
+ 
