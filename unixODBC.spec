@@ -4,7 +4,7 @@
 %bcond_without	qt	# without Qt GUI stuff
 #
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
-Summary(pl.UTF-8):   unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
+Summary(pl.UTF-8):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.12
 Release:	1
@@ -49,7 +49,7 @@ unixODBC - kompletne, darmowe/otwarte ODBC dla systemów UNIX/Linux.
 
 %package devel
 Summary:	unixODBC header files and development documentation
-Summary(pl.UTF-8):   Pliki nagłówkowe i dokunentacja do unixODBC
+Summary(pl.UTF-8):	Pliki nagłówkowe i dokunentacja do unixODBC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libltdl-devel
@@ -63,7 +63,7 @@ Pliki nagłówkowe i dokunentacja do unixODBC.
 
 %package static
 Summary:	unixODBC static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne unixODBC
+Summary(pl.UTF-8):	Biblioteki statyczne unixODBC
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -75,7 +75,7 @@ Biblioteki statyczne unixODBC.
 
 %package gnome
 Summary:	GNOME library and configuration GUI for unixODBC
-Summary(pl.UTF-8):   Oparta na GNOME biblioteka i graficzny konfigurator dla unixODBC
+Summary(pl.UTF-8):	Oparta na GNOME biblioteka i graficzny konfigurator dla unixODBC
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 
@@ -89,7 +89,7 @@ Oparta na GNOME biblioteka (libgtkodbcconfig) i graficzny konfigurator
 
 %package gnome-devel
 Summary:	Header file for libgtkodbcconfig library
-Summary(pl.UTF-8):   Plik nagłówkowy biblioteki libgtkodbcconfig
+Summary(pl.UTF-8):	Plik nagłówkowy biblioteki libgtkodbcconfig
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-gnome = %{version}-%{release}
@@ -103,7 +103,7 @@ Plik nagłówkowy biblioteki libgtkodbcconfig.
 
 %package gnome-static
 Summary:	Static libgtkodbcconfig library
-Summary(pl.UTF-8):   Statyczna biblioteka libgtkodbcconfig
+Summary(pl.UTF-8):	Statyczna biblioteka libgtkodbcconfig
 Group:		X11/Development/Libraries
 Requires:	%{name}-gnome-devel = %{version}-%{release}
 
@@ -115,7 +115,7 @@ Statyczna biblioteka libgtkodbcconfig.
 
 %package qt
 Summary:	Qt-based GUIs for unixODBC
-Summary(pl.UTF-8):   Oparte na Qt graficzne interfejsy dla unixODBC
+Summary(pl.UTF-8):	Oparte na Qt graficzne interfejsy dla unixODBC
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 
