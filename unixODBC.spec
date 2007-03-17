@@ -36,10 +36,10 @@ BuildRequires:	libltdl-devel
 BuildRequires:	libtool >= 1:1.4.2-9
 %{?with_qt:BuildRequires:	qt-devel >= 2.0}
 BuildRequires:	readline-devel >= 4.2
-Requires(post):	/sbin/ldconfig
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildConflicts:	kdesupport-odbc
+Requires(post):	/sbin/ldconfig
 Obsoletes:	libunixODBC2
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 unixODBC is a complete, free/open, ODBC solution for UNIX/Linux.
