@@ -4,7 +4,7 @@
 %bcond_without	qt	# without Qt GUI stuff
 #
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
-Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
+Summary(pl.UTF-8):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.12
 Release:	2
@@ -44,12 +44,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 unixODBC is a complete, free/open, ODBC solution for UNIX/Linux.
 
-%description -l pl
-unixODBC - kompletne, darmowe/otwarte ODBC dla system體 UNIX/Linux.
+%description -l pl.UTF-8
+unixODBC - kompletne, darmowe/otwarte ODBC dla system贸w UNIX/Linux.
 
 %package devel
 Summary:	unixODBC header files and development documentation
-Summary(pl):	Pliki nag丑wkowe i dokunentacja do unixODBC
+Summary(pl.UTF-8):	Pliki nag艂贸wkowe i dokunentacja do unixODBC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libltdl-devel
@@ -58,24 +58,24 @@ Obsoletes:	libunixODBC2-devel
 %description devel
 unixODBC header files and development documentation.
 
-%description devel -l pl
-Pliki nag丑wkowe i dokunentacja do unixODBC.
+%description devel -l pl.UTF-8
+Pliki nag艂贸wkowe i dokunentacja do unixODBC.
 
 %package static
 Summary:	unixODBC static libraries
-Summary(pl):	Biblioteki statyczne unixODBC
+Summary(pl.UTF-8):	Biblioteki statyczne unixODBC
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 unixODBC static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne unixODBC.
 
 %package gnome
 Summary:	GNOME library and configuration GUI for unixODBC
-Summary(pl):	Oparta na GNOME biblioteka i graficzny konfigurator dla unixODBC
+Summary(pl.UTF-8):	Oparta na GNOME biblioteka i graficzny konfigurator dla unixODBC
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 
@@ -83,13 +83,13 @@ Requires:	%{name} = %{version}-%{release}
 GNOME library (libgtkodbcconfig) and configuration GUI (gODBCConfig)
 for unixODBC.
 
-%description gnome -l pl
+%description gnome -l pl.UTF-8
 Oparta na GNOME biblioteka (libgtkodbcconfig) i graficzny konfigurator
 (gODBCConfig) do unixODBC.
 
 %package gnome-devel
 Summary:	Header file for libgtkodbcconfig library
-Summary(pl):	Plik nag丑wkowy biblioteki libgtkodbcconfig
+Summary(pl.UTF-8):	Plik nag艂贸wkowy biblioteki libgtkodbcconfig
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-gnome = %{version}-%{release}
@@ -98,24 +98,24 @@ Requires:	gnome-libs-devel
 %description gnome-devel
 Header file for libgtkodbcconfig library.
 
-%description gnome-devel -l pl
-Plik nag丑wkowy biblioteki libgtkodbcconfig.
+%description gnome-devel -l pl.UTF-8
+Plik nag艂贸wkowy biblioteki libgtkodbcconfig.
 
 %package gnome-static
 Summary:	Static libgtkodbcconfig library
-Summary(pl):	Statyczna biblioteka libgtkodbcconfig
+Summary(pl.UTF-8):	Statyczna biblioteka libgtkodbcconfig
 Group:		X11/Development/Libraries
 Requires:	%{name}-gnome-devel = %{version}-%{release}
 
 %description gnome-static
 Static libgtkodbcconfig library.
 
-%description gnome-static -l pl
+%description gnome-static -l pl.UTF-8
 Statyczna biblioteka libgtkodbcconfig.
 
 %package qt
 Summary:	Qt-based GUIs for unixODBC
-Summary(pl):	Oparte na Qt graficzne interfejsy dla unixODBC
+Summary(pl.UTF-8):	Oparte na Qt graficzne interfejsy dla unixODBC
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 
@@ -124,8 +124,8 @@ Qt-based GUIs for unixODBC - libodbcinstQ plugin for libodbcinst
 library and applications: DataManager, DataManagerII, ODBCConfig,
 odbctest.
 
-%description qt -l pl
-Oparte na Qt graficzne interfejsy u縴tkownika do unixODBC - wtyczka
+%description qt -l pl.UTF-8
+Oparte na Qt graficzne interfejsy u偶ytkownika do unixODBC - wtyczka
 libodbcinstQ dla biblioteki libodbcinst oraz aplikacje: DataManager,
 DataManagerII, ODBCConfig, odbctest.
 
@@ -154,7 +154,8 @@ DataManagerII, ODBCConfig, odbctest.
 %endif
 	--enable-drivers \
 	--enable-static \
-	--enable-threads
+	--enable-threads \
+	--x-includes=/usr/include
 
 %{__make}
 
