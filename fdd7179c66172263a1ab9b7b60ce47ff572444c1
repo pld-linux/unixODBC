@@ -1,0 +1,4 @@
+- updated to 2.1.0
+- updated patches
+- added registering drivers in %post section
+- part of am_fix is obsolette, builds without it. Misiek, what's doing this patch?
