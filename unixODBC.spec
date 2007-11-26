@@ -1,13 +1,13 @@
 #
 # Conditional build:
-%bcond_without	gnome1	# without GNOME1 GUI stuff (default on - no GNOME2 port yet)
+%bcond_with	gnome1	# without GNOME1 GUI stuff (default on - no GNOME2 port yet)
 %bcond_without	qt	# without Qt GUI stuff
 #
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl.UTF-8):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.12
-Release:	3
+Release:	4
 License:	LGPL
 Group:		Libraries
 # WARNING: they used to place snapshots of new versions using %{name}-%{version}.tar.gz
