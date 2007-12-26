@@ -1,8 +1,7 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=ODBC Data Source Administrator
 Exec=ODBCConfig
-Icon=unixODBC.png
+Icon=unixODBC
 Type=Application
 Terminal=false
 Categories=Qt;System;
