@@ -192,13 +192,13 @@ install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 find doc -name Makefile\* -exec rm -f {} \;
 
 # libodbcinstQ.so.1 is lt_dlopened
-rm -f $RPM_BUILD_ROOT%{_libdir}/libodbcinstQ.{la,a}
-# libodbccr.so.1. is lt_dlopened
-rm -f $RPM_BUILD_ROOT%{_libdir}/libodbccr.{la,a}
-# Setup drivers are lt_dlopened by given name (let it be SONAME)
-rm -f $RPM_BUILD_ROOT%{_libdir}/lib{odbc{mini,my,psql,drvcfg{1,2},nn,txt},oraodbc,esoob,oplodbc,sapdb,tds}S.{la,a}
-# Drivers are lt_dlopened by given name (let it be SONAME)
-rm -f $RPM_BUILD_ROOT%{_libdir}/lib{odbcpsql,nn,template,odbctxt}.{la,a}
+rm $RPM_BUILD_ROOT%{_libdir}/libodbcinstQ.{la,a}
+# libodbccr.so.1 is lt_dlopened
+rm $RPM_BUILD_ROOT%{_libdir}/libodbccr.{la,a}
+# Setup drivers are lt_dlopened by given name (.so or SONAME)
+rm $RPM_BUILD_ROOT%{_libdir}/lib{esoob,mimer,odbc{drvcfg{1,2},mini,my,nn,psql,txt},oplodbc,oraodbc,sapdb,tds}S.{la,a}
+# Drivers are lt_dlopened by given name (.so or SONAME)
+rm $RPM_BUILD_ROOT%{_libdir}/lib{boundparam,nn,odbcpsql,odbctxt,template}.{la,a}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -237,52 +237,108 @@ EOF
 %attr(755,root,root) %{_bindir}/odbcinst
 # can be useful not only for development
 %attr(755,root,root) %{_bindir}/odbc_config
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libgtrtst.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgtrtst.so.1
+%attr(755,root,root) %{_libdir}/libodbc.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbc.so.1
+%attr(755,root,root) %{_libdir}/libodbcinst.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcinst.so.1
+# drivers
+%attr(755,root,root) %{_libdir}/libesoobS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libesoobS.so.1
+%attr(755,root,root) %{_libdir}/libmimerS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmimerS.so.1
+%attr(755,root,root) %{_libdir}/libnn.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libnn.so.1
+%attr(755,root,root) %{_libdir}/libodbccr.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbccr.so.1
+%attr(755,root,root) %{_libdir}/libodbcdrvcfg1S.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcdrvcfg1S.so.1
+%attr(755,root,root) %{_libdir}/libodbcdrvcfg2S.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcdrvcfg2S.so.1
+%attr(755,root,root) %{_libdir}/libodbcminiS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcminiS.so.1
+%attr(755,root,root) %{_libdir}/libodbcmyS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcmyS.so.1
+%attr(755,root,root) %{_libdir}/libodbcnnS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcnnS.so.1
+%attr(755,root,root) %{_libdir}/libodbcpsql.so.1.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcpsql.so.1
+%attr(755,root,root) %{_libdir}/libodbcpsql.so.2.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcpsql.so.2
+%attr(755,root,root) %{_libdir}/libodbcpsqlS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcpsqlS.so.1
+%attr(755,root,root) %{_libdir}/libodbctxt.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbctxt.so.1
+%attr(755,root,root) %{_libdir}/libodbctxtS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbctxtS.so.1
+%attr(755,root,root) %{_libdir}/liboplodbcS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/liboplodbcS.so.1
+%attr(755,root,root) %{_libdir}/liboraodbcS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/liboraodbcS.so.1
+%attr(755,root,root) %{_libdir}/libsapdbS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libsapdbS.so.1
+%attr(755,root,root) %{_libdir}/libtdsS.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtdsS.so.1
+%attr(755,root,root) %{_libdir}/libtemplate.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtemplate.so.1
 # for *dlopening
+%attr(755,root,root) %{_libdir}/libesoobS.so
+%attr(755,root,root) %{_libdir}/libmimerS.so
+%attr(755,root,root) %{_libdir}/libnn.so
 %attr(755,root,root) %{_libdir}/libodbccr.so
-%attr(755,root,root) %{_libdir}/libodbcminiS.so
-%attr(755,root,root) %{_libdir}/libodbcmyS.so
-%attr(755,root,root) %{_libdir}/libodbcpsqlS.so
 %attr(755,root,root) %{_libdir}/libodbcdrvcfg1S.so
 %attr(755,root,root) %{_libdir}/libodbcdrvcfg2S.so
+%attr(755,root,root) %{_libdir}/libodbcminiS.so
+%attr(755,root,root) %{_libdir}/libodbcmyS.so
 %attr(755,root,root) %{_libdir}/libodbcnnS.so
+%attr(755,root,root) %{_libdir}/libodbcpsql.so
+%attr(755,root,root) %{_libdir}/libodbcpsqlS.so
+%attr(755,root,root) %{_libdir}/libodbctxt.so
 %attr(755,root,root) %{_libdir}/libodbctxtS.so
-%attr(755,root,root) %{_libdir}/liboraodbcS.so
-%attr(755,root,root) %{_libdir}/libesoobS.so
 %attr(755,root,root) %{_libdir}/liboplodbcS.so
+%attr(755,root,root) %{_libdir}/liboraodbcS.so
 %attr(755,root,root) %{_libdir}/libsapdbS.so
 %attr(755,root,root) %{_libdir}/libtdsS.so
-%attr(755,root,root) %{_libdir}/libodbcpsql.so
-%attr(755,root,root) %{_libdir}/libnn.so
 %attr(755,root,root) %{_libdir}/libtemplate.so
-%attr(755,root,root) %{_libdir}/libodbctxt.so
-%{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
-%{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbc*.ini
+# samples/tests
+%attr(755,root,root) %{_libdir}/libboundparam.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libboundparam.so.1
+%attr(755,root,root) %{_libdir}/libboundparam.so
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbc.ini
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbcinst.ini
 
 %files devel
 %defattr(644,root,root,755)
 %doc ChangeLog doc/ProgrammerManual
-%attr(755,root,root) %{_libdir}/libboundparam.so
+%attr(755,root,root) %{_libdir}/libgtrtst.so
 %attr(755,root,root) %{_libdir}/libodbc.so
 %attr(755,root,root) %{_libdir}/libodbcinst.so
-%{_libdir}/lib*.la
-%{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
-%{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
-%{_includedir}/*.h
-%{?with_gnome1:%exclude %{_includedir}/odbcconfig.h}
+%{_libdir}/libgtrtst.la
+%{_libdir}/libodbc.la
+%{_libdir}/libodbcinst.la
+%{_includedir}/autotest.h
+%{_includedir}/odbcinst.h
+%{_includedir}/odbcinstext.h
+%{_includedir}/sql.h
+%{_includedir}/sqlext.h
+%{_includedir}/sqltypes.h
+%{_includedir}/sqlucode.h
+%{_includedir}/uodbc_extras.h
+%{_includedir}/uodbc_stats.h
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
-%{?with_gnome1:%exclude %{_libdir}/libgtkodbcconfig.*}
-%{?with_qt:%exclude %{_libdir}/libodbcinstQ.*}
+%{_libdir}/libgtrtst.a
+%{_libdir}/libodbc.a
+%{_libdir}/libodbcinst.a
 
 %if %{with gnome1}
 %files gnome
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gODBCConfig
 %attr(755,root,root) %{_libdir}/libgtkodbcconfig.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgtkodbcconfig.so.0
 %{_pixmapsdir}/gODBCConfig
 
 %files gnome-devel
@@ -304,7 +360,10 @@ EOF
 %attr(755,root,root) %{_bindir}/ODBCConfig
 %attr(755,root,root) %{_bindir}/odbctest
 %attr(755,root,root) %{_libdir}/libodbcinstQ.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libodbcinstQ.so.1
 %attr(755,root,root) %{_libdir}/libodbcinstQ.so
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*.png
+%{_desktopdir}/DataManager.desktop
+%{_desktopdir}/ODBCConfig.desktop
+%{_desktopdir}/ODBCtest.desktop
+%{_pixmapsdir}/unixODBC.png
 %endif
