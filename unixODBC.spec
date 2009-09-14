@@ -191,8 +191,10 @@ install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 find doc -name Makefile\* -exec rm -f {} \;
 
+%if %{with qt}
 # libodbcinstQ.so.1 is lt_dlopened
 rm $RPM_BUILD_ROOT%{_libdir}/libodbcinstQ.{la,a}
+%endif
 # libodbccr.so.1 is lt_dlopened
 rm $RPM_BUILD_ROOT%{_libdir}/libodbccr.{la,a}
 # Setup drivers are lt_dlopened by given name (.so or SONAME)
