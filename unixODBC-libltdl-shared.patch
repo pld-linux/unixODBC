@@ -1,10 +1,10 @@
---- unixODBC-2.2.9/Makefile.am.orig	2004-06-29 14:11:02.000000000 +0200
-+++ unixODBC-2.2.9/Makefile.am	2004-07-07 20:10:49.461109840 +0200
+--- unixODBC-2.2.14/Makefile.am.orig	2008-09-02 14:29:31.000000000 +0200
++++ unixODBC-2.2.14/Makefile.am	2009-10-25 09:00:03.804435785 +0100
 @@ -3,7 +3,6 @@
-     log \
+ 	log \
  	lst \
  	ini \
--    	libltdl \
+-	libltdl \
  	odbcinst \
  	DriverManager \
  	odbcinstQ \
