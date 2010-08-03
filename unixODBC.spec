@@ -7,7 +7,7 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.2.12
-Release:	3
+Release:	4
 License:	LGPL
 Group:		Libraries
 # WARNING: they used to place snapshots of new versions using %{name}-%{version}.tar.gz
@@ -145,6 +145,7 @@ DataManagerII, ODBCConfig, odbctest.
 %{__autoconf}
 %{__automake}
 %configure \
+	--enable-ltdl-install=no \
 %if %{with qt}
 	--enable-gui \
 	--with-qt-includes=/usr/include/qt \
