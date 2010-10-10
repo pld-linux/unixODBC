@@ -1,29 +1,18 @@
-# TODO: qt4 GUI parts
-#
-# Conditional build:
-%bcond_without	qt	# Qt GUI stuff
-#
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl.UTF-8):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
-Version:	2.2.14
+Version:	2.3.0
 Release:	1
 License:	LGPL v2+ (libraries), GPL v2+ (programs, News Server driver)
 Group:		Libraries
 Source0:	ftp://ftp.unixodbc.org/pub/unixODBC/%{name}-%{version}.tar.gz
-# Source0-md5:	0b88d6970058acb0d814d8209af63b4a
-Source1:	DataManager.desktop
-Source2:	ODBCConfig.desktop
-Source3:	ODBCtest.desktop
-Source4:	%{name}.png
-Patch0:		%{name}-no_libnsl.patch
-Patch1:		%{name}-libltdl-shared.patch
+# Source0-md5:	f2ad22cbdffe836c58987ed2332c2e99
 URL:		http://www.unixodbc.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	flex
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool >= 1:1.4.2-9
-%{?with_qt:BuildRequires:	qt-devel >= 2.0}
 BuildRequires:	readline-devel >= 4.2
 BuildConflicts:	kdesupport-odbc
 Requires(post):	/sbin/ldconfig
@@ -65,41 +54,18 @@ unixODBC static libraries.
 %description static -l pl.UTF-8
 Biblioteki statyczne unixODBC.
 
-%package qt
-Summary:	Qt-based GUIs for unixODBC
-Summary(pl.UTF-8):	Oparte na Qt graficzne interfejsy dla unixODBC
-Group:		X11/Applications
-Requires:	%{name} = %{version}-%{release}
-
-%description qt
-Qt-based GUIs for unixODBC - libodbcinstQ plugin for libodbcinst
-library and applications: DataManager, DataManagerII, ODBCConfig,
-odbctest.
-
-%description qt -l pl.UTF-8
-Oparte na Qt graficzne interfejsy użytkownika do unixODBC - wtyczka
-libodbcinstQ dla biblioteki libodbcinst oraz aplikacje: DataManager,
-DataManagerII, ODBCConfig, odbctest.
-
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
-	--disable-ltdl-install \
-%if %{with qt}
-	--enable-gui \
-	--with-qt-includes=/usr/include/qt \
-	--with-qt-libraries=%{_libdir} \
-%else
-	--disable-gui \
-%endif
+	--enable-drivers \
+	--enable-driverc \
 	--enable-static
 
 %{__make}
@@ -110,24 +76,17 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%if %{with qt}
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
-install %{SOURCE1} %{SOURCE2} %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
-%endif
+find doc -name 'Makefile*' | xargs -r rm -f
 
-find doc -name Makefile\* -exec rm -f {} \;
-
-%if %{with qt}
-# libodbcinstQ.so.1 is lt_dlopened
-rm $RPM_BUILD_ROOT%{_libdir}/libodbcinstQ.{la,a}
-%endif
 # libodbccr.so.1 is lt_dlopened
 rm $RPM_BUILD_ROOT%{_libdir}/libodbccr.{la,a}
 # Setup drivers are lt_dlopened by given name (.so or SONAME)
 rm $RPM_BUILD_ROOT%{_libdir}/lib{esoob,mimer,odbc{drvcfg{1,2},mini,my,nn,psql,txt},oplodbc,oraodbc,sapdb,tds}S.{la,a}
 # Drivers are lt_dlopened by given name (.so or SONAME)
-rm $RPM_BUILD_ROOT%{_libdir}/lib{boundparam,nn,odbcpsql,template}.{la,a}
+rm $RPM_BUILD_ROOT%{_libdir}/lib{nn,odbcpsql,template}.{la,a}
+
+# (temporarily) missing in make install
+install include/autotest.h $RPM_BUILD_ROOT%{_includedir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -145,26 +104,21 @@ EOF
 /usr/bin/odbcinst -i -d -r <<EOF
 [PostgreSQL]
 Description = PostgreSQL driver
-Driver = %{_libdir}/libodbcpsql.so.1
+Driver = %{_libdir}/libodbcpsql.so.2
 Setup = %{_libdir}/libodbcpsqlS.so.1
 EOF
 
 %postun -p /sbin/ldconfig
 
-%post	qt -p /sbin/ldconfig
-%postun	qt -p /sbin/ldconfig
-
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README doc/AdministratorManual doc/UserManual
+%doc AUTHORS ChangeLog README doc/AdministratorManual doc/UserManual
 %attr(755,root,root) %{_bindir}/dltest
 %attr(755,root,root) %{_bindir}/isql
 %attr(755,root,root) %{_bindir}/iusql
 %attr(755,root,root) %{_bindir}/odbcinst
 # can be useful not only for development
 %attr(755,root,root) %{_bindir}/odbc_config
-%attr(755,root,root) %{_libdir}/libgtrtst.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgtrtst.so.1
 %attr(755,root,root) %{_libdir}/libodbc.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbc.so.1
 %attr(755,root,root) %{_libdir}/libodbcinst.so.*.*.*
@@ -188,9 +142,7 @@ EOF
 %attr(755,root,root) %ghost %{_libdir}/libodbcmyS.so.1
 %attr(755,root,root) %{_libdir}/libodbcnnS.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbcnnS.so.1
-%attr(755,root,root) %{_libdir}/libodbcpsql.so.1.*.*
-%attr(755,root,root) %ghost %{_libdir}/libodbcpsql.so.1
-%attr(755,root,root) %{_libdir}/libodbcpsql.so.2.*.*
+%attr(755,root,root) %{_libdir}/libodbcpsql.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbcpsql.so.2
 %attr(755,root,root) %{_libdir}/libodbcpsqlS.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbcpsqlS.so.1
@@ -227,21 +179,15 @@ EOF
 %attr(755,root,root) %{_libdir}/libsapdbS.so
 %attr(755,root,root) %{_libdir}/libtdsS.so
 %attr(755,root,root) %{_libdir}/libtemplate.so
-# samples/tests
-%attr(755,root,root) %{_libdir}/libboundparam.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libboundparam.so.1
-%attr(755,root,root) %{_libdir}/libboundparam.so
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbc.ini
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbcinst.ini
 %dir %{_sysconfdir}/ODBCDataSources
 
 %files devel
 %defattr(644,root,root,755)
-%doc ChangeLog doc/ProgrammerManual
-%attr(755,root,root) %{_libdir}/libgtrtst.so
+%doc ChangeLog doc/{ProgrammerManual,lst}
 %attr(755,root,root) %{_libdir}/libodbc.so
 %attr(755,root,root) %{_libdir}/libodbcinst.so
-%{_libdir}/libgtrtst.la
 %{_libdir}/libodbc.la
 %{_libdir}/libodbcinst.la
 %{_includedir}/autotest.h
@@ -257,22 +203,5 @@ EOF
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libgtrtst.a
 %{_libdir}/libodbc.a
 %{_libdir}/libodbcinst.a
-
-%if %{with qt}
-%files qt
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/DataManager
-%attr(755,root,root) %{_bindir}/DataManagerII
-%attr(755,root,root) %{_bindir}/ODBCConfig
-%attr(755,root,root) %{_bindir}/odbctest
-%attr(755,root,root) %{_libdir}/libodbcinstQ.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libodbcinstQ.so.1
-%attr(755,root,root) %{_libdir}/libodbcinstQ.so
-%{_desktopdir}/DataManager.desktop
-%{_desktopdir}/ODBCConfig.desktop
-%{_desktopdir}/ODBCtest.desktop
-%{_pixmapsdir}/unixODBC.png
-%endif

@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=ODBC Data Manager
-Exec=DataManagerII
-Icon=unixODBC
-Type=Application
-Terminal=false
-Categories=Qt;System;
-# vi: encoding=utf-8
