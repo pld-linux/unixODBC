@@ -16,7 +16,7 @@ BuildRequires:	libtool >= 1:1.4.2-9
 BuildRequires:	readline-devel >= 4.2
 BuildConflicts:	kdesupport-odbc
 Requires(post):	/sbin/ldconfig
-%ifarch %{x8664} ppc64 sparc64 s390x
+%ifarch %{x8664} ia64 ppc64 sparc64 s390x
 Provides:	libodbc.so()(64bit)
 Provides:	libodbcinst.so()(64bit)
 %else
