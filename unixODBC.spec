@@ -2,7 +2,7 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl.UTF-8):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.3.1
-Release:	1
+Release:	2
 License:	LGPL v2+ (libraries), GPL v2+ (programs, News Server driver)
 Group:		Libraries
 Source0:	ftp://ftp.unixodbc.org/pub/unixODBC/%{name}-%{version}.tar.gz
@@ -121,8 +121,10 @@ EOF
 %attr(755,root,root) %{_bindir}/odbc_config
 %attr(755,root,root) %{_libdir}/libodbc.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbc.so.2
+%attr(755,root,root) %{_libdir}/libodbc.so
 %attr(755,root,root) %{_libdir}/libodbcinst.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbcinst.so.2
+%attr(755,root,root) %{_libdir}/libodbcinst.so
 # drivers
 %attr(755,root,root) %{_libdir}/libesoobS.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libesoobS.so.1
@@ -186,8 +188,6 @@ EOF
 %files devel
 %defattr(644,root,root,755)
 %doc ChangeLog doc/{ProgrammerManual,lst}
-%attr(755,root,root) %{_libdir}/libodbc.so
-%attr(755,root,root) %{_libdir}/libodbcinst.so
 %{_libdir}/libodbc.la
 %{_libdir}/libodbcinst.la
 %{_includedir}/autotest.h
