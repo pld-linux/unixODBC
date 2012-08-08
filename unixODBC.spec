@@ -79,18 +79,24 @@ Biblioteki statyczne unixODBC.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_sysconfdir}
+
+:> $RPM_BUILD_ROOT%{_sysconfdir}/odbc.ini
+:> $RPM_BUILD_ROOT%{_sysconfdir}/odbcinst.ini
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-find doc -name 'Makefile*' | xargs -r rm -f
+%{__rm} -rf doc-install
+cp -a doc doc-install
+find doc-install  -name 'Makefile*' | xargs -r %{__rm}
 
 # libodbccr.so.1 is lt_dlopened
-rm $RPM_BUILD_ROOT%{_libdir}/libodbccr.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libodbccr.{la,a}
 # Setup drivers are lt_dlopened by given name (.so or SONAME)
-rm $RPM_BUILD_ROOT%{_libdir}/lib{esoob,mimer,odbc{drvcfg{1,2},mini,my,nn,psql,txt},oplodbc,oraodbc,sapdb,tds}S.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib{esoob,mimer,odbc{drvcfg{1,2},mini,my,nn,psql,txt},oplodbc,oraodbc,sapdb,tds}S.{la,a}
 # Drivers are lt_dlopened by given name (.so or SONAME)
-rm $RPM_BUILD_ROOT%{_libdir}/lib{nn,odbcpsql,template}.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib{nn,odbcpsql,template}.{la,a}
 
 # (temporarily) missing in make install
 install include/autotest.h $RPM_BUILD_ROOT%{_includedir}
@@ -119,7 +125,7 @@ EOF
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README doc/AdministratorManual doc/UserManual
+%doc AUTHORS ChangeLog README doc-install/AdministratorManual doc-install/UserManual
 %attr(755,root,root) %{_bindir}/dltest
 %attr(755,root,root) %{_bindir}/isql
 %attr(755,root,root) %{_bindir}/iusql
@@ -194,7 +200,7 @@ EOF
 
 %files devel
 %defattr(644,root,root,755)
-%doc ChangeLog doc/{ProgrammerManual,lst}
+%doc ChangeLog doc-install/{ProgrammerManual,lst}
 %{_libdir}/libodbc.la
 %{_libdir}/libodbcinst.la
 %{_includedir}/autotest.h
