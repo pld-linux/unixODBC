@@ -1,18 +1,18 @@
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl.UTF-8):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
-Version:	2.3.1
-Release:	4
+Version:	2.3.2
+Release:	1
 License:	LGPL v2+ (libraries), GPL v2+ (programs, News Server driver)
 Group:		Libraries
 Source0:	ftp://ftp.unixodbc.org/pub/unixODBC/%{name}-%{version}.tar.gz
-# Source0-md5:	86788d4006620fa1f171c13d07fdcaab
+# Source0-md5:	5e4528851eda5d3d4aed249b669bd05b
 URL:		http://www.unixodbc.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
-BuildRequires:	libltdl-devel
-BuildRequires:	libtool >= 1:1.4.2-9
+BuildRequires:	libltdl-devel >= 2:2
+BuildRequires:	libtool >= 2:2
 BuildRequires:	readline-devel >= 4.2
 BuildConflicts:	kdesupport-odbc
 Requires(post):	/sbin/ldconfig
@@ -73,7 +73,8 @@ Biblioteki statyczne unixODBC.
 %configure \
 	--enable-drivers \
 	--enable-driverc \
-	--enable-static
+	--enable-static \
+	--without-included-ltdl
 
 %{__make}
 
@@ -132,6 +133,7 @@ EOF
 %attr(755,root,root) %{_bindir}/odbcinst
 # can be useful not only for development
 %attr(755,root,root) %{_bindir}/odbc_config
+%attr(755,root,root) %{_bindir}/slencheck
 %attr(755,root,root) %{_libdir}/libodbc.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbc.so.2
 %attr(755,root,root) %{_libdir}/libodbc.so
@@ -197,6 +199,10 @@ EOF
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbc.ini
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbcinst.ini
 %dir %{_sysconfdir}/ODBCDataSources
+%{_mandir}/man1/isql.1*
+%{_mandir}/man1/odbcinst.1*
+%{_mandir}/man5/odbc.ini.5*
+%{_mandir}/man5/odbcinst.ini.5*
 
 %files devel
 %defattr(644,root,root,755)
