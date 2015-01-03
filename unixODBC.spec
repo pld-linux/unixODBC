@@ -8,11 +8,8 @@ Group:		Libraries
 Source0:	ftp://ftp.unixodbc.org/pub/unixODBC/%{name}-%{version}.tar.gz
 # Source0-md5:	5e4528851eda5d3d4aed249b669bd05b
 URL:		http://www.unixodbc.org/
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	flex
 BuildRequires:	libltdl-devel >= 2:2
-BuildRequires:	libtool >= 2:2
 BuildRequires:	readline-devel >= 4.2
 BuildConflicts:	kdesupport-odbc
 Requires(post):	/sbin/ldconfig
@@ -65,11 +62,6 @@ Biblioteki statyczne unixODBC.
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
 %configure \
 	--enable-drivers \
 	--enable-driverc \
