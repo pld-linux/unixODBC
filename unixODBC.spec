@@ -1,12 +1,12 @@
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl.UTF-8):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
-Version:	2.3.2
-Release:	2
+Version:	2.3.4
+Release:	1
 License:	LGPL v2+ (libraries), GPL v2+ (programs, News Server driver)
 Group:		Libraries
 Source0:	ftp://ftp.unixodbc.org/pub/unixODBC/%{name}-%{version}.tar.gz
-# Source0-md5:	5e4528851eda5d3d4aed249b669bd05b
+# Source0-md5:	bd25d261ca1808c947cb687e2034be81
 URL:		http://www.unixodbc.org/
 BuildRequires:	flex
 BuildRequires:	libltdl-devel >= 2:2
@@ -191,10 +191,14 @@ EOF
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbc.ini
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbcinst.ini
 %dir %{_sysconfdir}/ODBCDataSources
+%{_mandir}/man1/dltest.1*
 %{_mandir}/man1/isql.1*
+%{_mandir}/man1/iusql.1*
+%{_mandir}/man1/odbc_config.1*
 %{_mandir}/man1/odbcinst.1*
 %{_mandir}/man5/odbc.ini.5*
 %{_mandir}/man5/odbcinst.ini.5*
+%{_mandir}/man7/unixODBC.7*
 
 %files devel
 %defattr(644,root,root,755)
@@ -206,6 +210,7 @@ EOF
 %{_includedir}/odbcinstext.h
 %{_includedir}/sql.h
 %{_includedir}/sqlext.h
+%{_includedir}/sqlspi.h
 %{_includedir}/sqltypes.h
 %{_includedir}/sqlucode.h
 %{_includedir}/unixodbc_conf.h
