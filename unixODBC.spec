@@ -1,12 +1,12 @@
 Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl.UTF-8):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
-Version:	2.3.7
-Release:	2
+Version:	2.3.11
+Release:	1
 License:	LGPL v2+ (libraries), GPL v2+ (programs, News Server driver)
 Group:		Libraries
 Source0:	ftp://ftp.unixodbc.org/pub/unixODBC/%{name}-%{version}.tar.gz
-# Source0-md5:	274a711b0c77394e052db6493840c6f9
+# Source0-md5:	0ff1fdbcb4c3c7dc2357f3fd6ba09169
 URL:		http://www.unixodbc.org/
 BuildRequires:	flex
 BuildRequires:	libltdl-devel >= 2:2
@@ -21,9 +21,9 @@ Provides:	libodbc.so
 Provides:	libodbcinst.so
 %endif
 Obsoletes:	libunixODBC2
-Obsoletes:	unixODBC-gnome
-Obsoletes:	unixODBC-gnome-devel
-Obsoletes:	unixODBC-gnome-static
+Obsoletes:	unixODBC-gnome < 2.2.14
+Obsoletes:	unixODBC-gnome-devel < 2.2.14
+Obsoletes:	unixODBC-gnome-static < 2.2.14
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -63,6 +63,7 @@ Biblioteki statyczne unixODBC.
 
 %build
 %configure \
+	--enable-driver-config \
 	--enable-drivers \
 	--enable-driverc \
 	--enable-static \
@@ -87,7 +88,7 @@ find doc-install  -name 'Makefile*' | xargs -r %{__rm}
 # libodbccr.so.1 is lt_dlopened
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libodbccr.{la,a}
 # Setup drivers are lt_dlopened by given name (.so or SONAME)
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib{esoob,mimer,odbc{drvcfg{1,2},mini,my,nn,psql,txt},oplodbc,oraodbc,sapdb,tds}S.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib{esoob,mimer,odbc{drvcfg{1,2},mini,my,nn,psql,txt},oplodbc,oraodbc,sapdb,tds}S.la
 # Drivers are lt_dlopened by given name (.so or SONAME)
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib{nn,odbcpsql,template}.{la,a}
 
@@ -126,6 +127,7 @@ EOF
 # can be useful not only for development
 %attr(755,root,root) %{_bindir}/odbc_config
 %attr(755,root,root) %{_bindir}/slencheck
+# some apps dlopen these by *.so
 %attr(755,root,root) %{_libdir}/libodbc.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbc.so.2
 %attr(755,root,root) %{_libdir}/libodbc.so
@@ -133,61 +135,33 @@ EOF
 %attr(755,root,root) %ghost %{_libdir}/libodbcinst.so.2
 %attr(755,root,root) %{_libdir}/libodbcinst.so
 # drivers
-%attr(755,root,root) %{_libdir}/libesoobS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libesoobS.so.1
-%attr(755,root,root) %{_libdir}/libmimerS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmimerS.so.1
 %attr(755,root,root) %{_libdir}/libnn.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libnn.so.1
 %attr(755,root,root) %{_libdir}/libodbccr.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbccr.so.2
-%attr(755,root,root) %{_libdir}/libodbcdrvcfg1S.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libodbcdrvcfg1S.so.1
-%attr(755,root,root) %{_libdir}/libodbcdrvcfg2S.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libodbcdrvcfg2S.so.1
-%attr(755,root,root) %{_libdir}/libodbcminiS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libodbcminiS.so.1
-%attr(755,root,root) %{_libdir}/libodbcmyS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libodbcmyS.so.1
-%attr(755,root,root) %{_libdir}/libodbcnnS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libodbcnnS.so.1
 %attr(755,root,root) %{_libdir}/libodbcpsql.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libodbcpsql.so.2
-%attr(755,root,root) %{_libdir}/libodbcpsqlS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libodbcpsqlS.so.1
-#%attr(755,root,root) %{_libdir}/libodbctxt.so.*.*.*
-#%attr(755,root,root) %ghost %{_libdir}/libodbctxt.so.1
-%attr(755,root,root) %{_libdir}/libodbctxtS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libodbctxtS.so.1
-%attr(755,root,root) %{_libdir}/liboplodbcS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liboplodbcS.so.1
-%attr(755,root,root) %{_libdir}/liboraodbcS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liboraodbcS.so.1
-%attr(755,root,root) %{_libdir}/libsapdbS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libsapdbS.so.1
-%attr(755,root,root) %{_libdir}/libtdsS.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtdsS.so.1
 %attr(755,root,root) %{_libdir}/libtemplate.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libtemplate.so.1
-# for *dlopening
-%attr(755,root,root) %{_libdir}/libesoobS.so
-%attr(755,root,root) %{_libdir}/libmimerS.so
+# drivers for dlopening
 %attr(755,root,root) %{_libdir}/libnn.so
 %attr(755,root,root) %{_libdir}/libodbccr.so
+%attr(755,root,root) %{_libdir}/libodbcpsql.so
+%attr(755,root,root) %{_libdir}/libtemplate.so
+# driver config modules
+%attr(755,root,root) %{_libdir}/libesoobS.so
+%attr(755,root,root) %{_libdir}/libmimerS.so
 %attr(755,root,root) %{_libdir}/libodbcdrvcfg1S.so
 %attr(755,root,root) %{_libdir}/libodbcdrvcfg2S.so
 %attr(755,root,root) %{_libdir}/libodbcminiS.so
 %attr(755,root,root) %{_libdir}/libodbcmyS.so
 %attr(755,root,root) %{_libdir}/libodbcnnS.so
-%attr(755,root,root) %{_libdir}/libodbcpsql.so
 %attr(755,root,root) %{_libdir}/libodbcpsqlS.so
-#%attr(755,root,root) %{_libdir}/libodbctxt.so
 %attr(755,root,root) %{_libdir}/libodbctxtS.so
 %attr(755,root,root) %{_libdir}/liboplodbcS.so
 %attr(755,root,root) %{_libdir}/liboraodbcS.so
 %attr(755,root,root) %{_libdir}/libsapdbS.so
 %attr(755,root,root) %{_libdir}/libtdsS.so
-%attr(755,root,root) %{_libdir}/libtemplate.so
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbc.ini
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/odbcinst.ini
 %dir %{_sysconfdir}/ODBCDataSources
@@ -213,9 +187,10 @@ EOF
 %{_includedir}/sqlspi.h
 %{_includedir}/sqltypes.h
 %{_includedir}/sqlucode.h
-%{_includedir}/unixodbc_conf.h
 %{_includedir}/uodbc_extras.h
 %{_includedir}/uodbc_stats.h
+%{_includedir}/unixodbc.h
+%{_includedir}/unixODBC
 %{_pkgconfigdir}/odbc.pc
 %{_pkgconfigdir}/odbccr.pc
 %{_pkgconfigdir}/odbcinst.pc
