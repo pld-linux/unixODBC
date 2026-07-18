@@ -1,0 +1,10 @@
+--- unixODBC-2.3.14/DriverManager/drivermanager.h.orig	2025-05-04 17:13:33.000000000 +0200
++++ unixODBC-2.3.14/DriverManager/drivermanager.h	2026-07-18 10:21:30.139598922 +0200
+@@ -31,6 +31,7 @@
+ #elif HAVE_LIBTHREAD
+ #include <thread.h>
+ #endif
++#include <stdint.h>
+ 
+ #define SQL_NOUNICODEMAP
+ #define  UNICODE

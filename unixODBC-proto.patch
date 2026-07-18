@@ -1,0 +1,55 @@
+--- unixODBC-2.3.14/Drivers/nn/SQLFetch.c.orig	2022-02-09 22:44:40.000000000 +0100
++++ unixODBC-2.3.14/Drivers/nn/SQLFetch.c	2026-07-18 11:01:03.350075470 +0200
+@@ -121,7 +121,7 @@ RETCODE SQL_API SQLFetch( HSTMT hstmt )
+ 			return SQL_ERROR;
+ 		}
+ 
+-		ret = cvt(  ptr, pcol->userbuf, pcol->userbufsize, &clen);
++		ret = ((char *(*)(char *, char *, long, long *))cvt)(  ptr, pcol->userbuf, pcol->userbufsize, &clen);
+ 
+ 		if ( ret )
+ 		{
+--- unixODBC-2.3.14/Drivers/nn/SQLGetData.c.orig	2022-02-09 22:44:40.000000000 +0100
++++ unixODBC-2.3.14/Drivers/nn/SQLGetData.c	2026-07-18 11:03:06.176076731 +0200
+@@ -116,7 +116,7 @@ RETCODE SQL_API SQLGetData(
+ 		return SQL_ERROR;
+ 	}
+ 
+-	ret = cvt(ptr, rgbValue, cbValueMax, &clen);
++	ret = ((char *(*)(char *, PTR, SDWORD, int *))cvt)(ptr, rgbValue, cbValueMax, &clen);
+ 
+ 	if ( ret )
+ 	{
+--- unixODBC-2.3.14/Drivers/nn/SQLParamData.c.orig	2022-02-09 22:44:40.000000000 +0100
++++ unixODBC-2.3.14/Drivers/nn/SQLParamData.c	2026-07-18 11:04:48.735521119 +0200
+@@ -43,7 +43,7 @@ RETCODE SQL_API SQLParamData(
+ 			else
+ 			{
+ 				cvt = ppar->cvt;
+-				data= cvt(ppar->putdtbuf, ppar->putdtlen, &dt);
++				data= ((char *(*)(char *, int, date_t *))cvt)(ppar->putdtbuf, ppar->putdtlen, &dt);
+ 			}
+ 
+ 			MEM_FREE( ppar->putdtbuf );
+--- unixODBC-2.3.14/Drivers/nn/SQLPutData.c.orig	2022-02-09 22:44:40.000000000 +0100
++++ unixODBC-2.3.14/Drivers/nn/SQLPutData.c	2026-07-18 11:05:45.101882423 +0200
+@@ -67,7 +67,7 @@ RETCODE SQL_API SQLPutData(
+ 	}
+ 
+ 	cvt = ppar->cvt;
+-	data= cvt(ppar->putdtbuf, ppar->putdtlen, &dt);
++	data= ((char *(*)(char *, int, date_t *))cvt)(ppar->putdtbuf, ppar->putdtlen, &dt);
+ 
+ 	if ( data == (char*)(-1) )
+ 	{
+--- unixODBC-2.3.14/Drivers/nn/execute.c.orig	2018-01-02 11:48:19.000000000 +0100
++++ unixODBC-2.3.14/Drivers/nn/execute.c	2026-07-18 11:07:58.631159033 +0200
+@@ -124,7 +124,7 @@ int	sqlexecute (
+ 		}
+ 
+ 		cvt = ppar->cvt;
+-		data= cvt(ppar->userbuf, csize, &date );
++		data= ((char *(*)(char *, long, date_t *))cvt)(ppar->userbuf, csize, &date );
+ 
+ 		if( data == (char*)(-1) )
+ 		{
