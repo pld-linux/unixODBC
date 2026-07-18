@@ -69,6 +69,7 @@ Biblioteki statyczne unixODBC.
 
 %build
 CPPFLAGS="%{rpmcppflags} -D_DEFAULT_SOURCE"
+CFLAGS="%{rpmcflags} -Wno-error=incompatible-pointer-types"
 %configure \
 	--enable-driver-config \
 	--enable-drivers \
