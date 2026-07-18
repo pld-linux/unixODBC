@@ -1,0 +1,11 @@
+--- unixODBC-2.3.14/Drivers/Postgre7.1/md5.h.orig	2018-05-08 14:52:05.000000000 +0200
++++ unixODBC-2.3.14/Drivers/Postgre7.1/md5.h	2026-07-18 10:08:41.980427064 +0200
+@@ -19,7 +19,7 @@
+ /* From c.h */
+ #ifndef __BEOS__
+ 
+-#ifndef __cplusplus
++#if !(defined(__cplusplus) || (__STDC_VERSION__ >= 202311L))
+ 
+ #if !defined(bool) || defined(__APPLE_ALTIVEC__)
+ typedef char bool;

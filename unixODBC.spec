@@ -7,6 +7,7 @@ License:	LGPL v2+ (libraries), GPL v2+ (programs, News Server driver)
 Group:		Libraries
 Source0:	ftp://ftp.unixodbc.org/pub/unixODBC/%{name}-%{version}.tar.gz
 # Source0-md5:	316cede4896eb768fe4572d71dc04537
+Patch0:		%{name}-bool.patch
 URL:		https://www.unixodbc.org/
 BuildRequires:	flex
 BuildRequires:	libltdl-devel >= 2:2
@@ -60,6 +61,7 @@ Biblioteki statyczne unixODBC.
 
 %prep
 %setup -q
+%patch -P0 -p1
 
 %build
 %configure \
