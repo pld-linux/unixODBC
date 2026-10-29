@@ -2,14 +2,17 @@ Summary:	unixODBC - a complete, free/open, ODBC solution for UNIX/Linux
 Summary(pl.UTF-8):	unixODBC - kompletne, darmowe/otwarte ODBC dla UNIX/Linuksa
 Name:		unixODBC
 Version:	2.3.14
-Release:	1
+Release:	2
 License:	LGPL v2+ (libraries), GPL v2+ (programs, News Server driver)
 Group:		Libraries
-Source0:	ftp://ftp.unixodbc.org/pub/unixODBC/%{name}-%{version}.tar.gz
+Source0:	https://www.unixodbc.org/%{name}-%{version}.tar.gz
 # Source0-md5:	316cede4896eb768fe4572d71dc04537
 Patch0:		%{name}-bool.patch
 Patch1:		%{name}-includes.patch
 Patch2:		%{name}-proto.patch
+Patch3:		%{name}-SQLGetInfoW-overflow.patch
+Patch4:		%{name}-isql-get_args-overflow.patch
+Patch5:		%{name}-pool-null-credentials.patch
 URL:		https://www.unixodbc.org/
 BuildRequires:	flex
 BuildRequires:	libltdl-devel >= 2:2
@@ -66,10 +69,14 @@ Biblioteki statyczne unixODBC.
 %patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
+%patch -P3 -p1
+%patch -P4 -p1
+%patch -P5 -p1
 
 %build
 CPPFLAGS="%{rpmcppflags} -D_DEFAULT_SOURCE"
-CFLAGS="%{rpmcflags} -Wno-error=incompatible-pointer-types"
+# nn driver stores converters of different types in unprototyped () pointers
+CFLAGS="%{rpmcflags} -std=gnu17"
 %configure \
 	--enable-driver-config \
 	--enable-drivers \

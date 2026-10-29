@@ -1,0 +1,40 @@
+From a9e798925c4a4c8f100caca07503aa85be64fba1 Mon Sep 17 00:00:00 2001
+From: tomhanks <xiejing@kylinos.cn>
+Date: Wed, 26 Aug 2026 17:33:28 +0800
+Subject: [PATCH] Fix buffer overflow in isql get_args() (#236)
+
+---
+ exe/isql.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/exe/isql.c b/exe/isql.c
+index fd13e86..f2b0f79 100644
+--- a/exe/isql.c
++++ b/exe/isql.c
+@@ -1867,17 +1867,18 @@ static int get_args(char *string, char **args, int maxarg) {
+     {
+         p = NULL;
+ 
++        if (nargs >= maxarg)
++        {
++            free(copy);
++            return maxarg;
++        }
++
+         if (strcmp(arg, "\"\"") == 0)
+             args[nargs++] = strdup("");
+         else if (strcmp(arg, "null") == 0)
+             args[nargs++] = NULL;
+         else
+             args[nargs++] = strdup(arg);
+-        if (nargs > maxarg)
+-        {
+-            free(copy);
+-            return maxarg;
+-        }
+     }
+     free(copy);
+     return nargs;
+-- 
+2.56.0
+
